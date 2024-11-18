@@ -1,0 +1,32 @@
+Authentification :
+    Inscription :
+        Type : POST
+        URL : localhost:3001/api/auth/register
+    Connexion :
+        Type : POST
+        URL : localhost:3001/api/auth/login
+    Mon profil :
+        Type : GET
+        URL : localhost:3001/api/auth/me
+    Profil (spécifique) :
+        Type : GET
+        URL : localhost:3001/api/user/:id
+
+Locations :
+    Toutes les locations :
+        Type : GET 
+        URL : localhost:3001/api/rentals
+    Location (spécifique) :
+        Type : GET 
+        URL : localhost:3001/api/rentals/:id
+    Création :
+        Type : POST 
+        URL : localhost:3001/api/rentals/
+    Mise à jour :
+        Type : PUT 
+        URL : localhost:3001/api/rentals/:id
+
+Messages :
+    Message :
+        Type : POST 
+        URL : localhost:3001/api/messages/
