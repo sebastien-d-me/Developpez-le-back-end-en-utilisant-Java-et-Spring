@@ -1,4 +1,5 @@
 Spring Boot DevTools
 Spring Web
-Spring Security
+OAuth2 Resource Server
 MySQL Driver
+Spring Data JPA
