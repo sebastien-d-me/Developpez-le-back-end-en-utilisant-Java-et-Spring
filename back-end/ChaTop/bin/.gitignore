@@ -4,8 +4,8 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### ENV ###
-.env
+### APPLICATION PROPERTIES ###
+application.properties
 
 ### STS ###
 .apt_generated
