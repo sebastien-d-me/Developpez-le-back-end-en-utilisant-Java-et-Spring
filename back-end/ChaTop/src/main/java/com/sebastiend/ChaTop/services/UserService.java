@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.sebastiend.ChaTop.models.User;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
 import lombok.Data;
@@ -16,11 +16,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public Optional<User> getUser(final Long id) {
+    public Optional<UserEntity> getUser(final Long id) {
+        // Renvoyer un objet reformaté avec données utiles uniquement
         return userRepository.findById(id);
     }
 
-    public Iterable<User> getUsers() {
+    public Iterable<UserEntity> getUsers() {
         return userRepository.findAll();
     }
 
@@ -28,8 +29,8 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
-    public User saveUser(User user) {
-        User savedUser = userRepository.save(user);
+    public UserEntity saveUser(UserEntity user) {
+        UserEntity savedUser = userRepository.save(user);
         return savedUser;
     }
 }
