@@ -1,14 +1,13 @@
 package com.sebastiend.ChaTop.models.entities;
 
 import jakarta.persistence.*;
-
 import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
-public class UserEntity {
-    
+@Table(name = "rentals")
+public class RentalEntity {
+        
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -16,11 +15,20 @@ public class UserEntity {
     @Column(name="name")
     private String name;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="surface")
+    private String surface;
 
-    @Column(name="password")
-    private String password;
+    @Column(name="price")
+    private String price;
+
+    @Column(name="picture")
+    private String picture;
+
+    @Column(name="description")
+    private String description;
+
+    @Column(name="owner_id")
+    private Integer ownerId;
 
     @Column(name="created_at")
     private String createdAt;

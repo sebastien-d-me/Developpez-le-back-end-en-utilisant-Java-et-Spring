@@ -6,21 +6,21 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "users")
-public class UserEntity {
-    
+@Table(name = "messages")
+public class MessageEntity {
+            
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name="name")
-    private String name;
+    @Column(name="rental_id")
+    private Integer rentalId;
 
-    @Column(name="email")
-    private String email;
+    @Column(name="user_id")
+    private Integer userId;
 
-    @Column(name="password")
-    private String password;
+    @Column(name="message")
+    private String message;
 
     @Column(name="created_at")
     private String createdAt;
