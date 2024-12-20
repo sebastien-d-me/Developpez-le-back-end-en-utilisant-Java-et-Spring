@@ -7,5 +7,5 @@ import com.sebastiend.ChaTop.models.entities.UserEntity;
 
 @Repository
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
-    
+    public UserEntity findByName(String name);
 }
