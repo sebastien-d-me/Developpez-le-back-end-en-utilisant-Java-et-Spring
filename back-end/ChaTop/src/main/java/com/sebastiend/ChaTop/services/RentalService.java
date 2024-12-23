@@ -34,17 +34,13 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public void deleteRental(final Long id) {
-        rentalRepository.deleteById(id);
-    }
-
-    public RentalEntity saveRental(RentalEntity rental, MultipartFile picture) throws IOException {
+    public RentalEntity saveRental(RentalEntity rental, MultipartFile picture, Integer owner) throws IOException {
         RentalEntity newRental = new RentalEntity();
         newRental.setName(rental.getName());
         newRental.setSurface(rental.getSurface());
         newRental.setPrice(rental.getPrice());
         newRental.setDescription(rental.getDescription());
-        newRental.setOwnerId(1);
+        newRental.setOwnerId(owner);
         String uniqueID = UUID.randomUUID().toString().substring(0, 15);
         byte[] bytes = picture.getBytes();
         Path path = Paths.get("src/main/resources/uploads/rentals/" + uniqueID+"__"+picture.getOriginalFilename());
@@ -56,5 +52,19 @@ public class RentalService {
         newRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(newRental);
         return newRental;
+    }
+
+    public RentalEntity editRental(final Long id, RentalEntity rental) throws IOException {
+        RentalEntity newRental = new RentalEntity();
+        RentalEntity existRental = getRental(id).orElse(newRental);
+        existRental.setName(rental.getName());
+        existRental.setSurface(rental.getSurface());
+        existRental.setPrice(rental.getPrice());
+        existRental.setDescription(rental.getDescription());
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        LocalDateTime currentDate = LocalDateTime.now();
+        existRental.setUpdatedAt(dateFormatter.format(currentDate));
+        rentalRepository.save(existRental);
+        return existRental;
     }
 }

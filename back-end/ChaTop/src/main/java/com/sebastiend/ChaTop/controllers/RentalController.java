@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +14,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.services.RentalService;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 public class RentalController {
@@ -32,12 +34,12 @@ public class RentalController {
     }
 
     @PostMapping("/rentals/create")
-    public RentalEntity createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture) throws IOException {
-        return rentalService.saveRental(rental, picture);
+    public RentalEntity createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture, @RequestParam("owner_id") Integer owner) throws IOException {
+        return rentalService.saveRental(rental, picture, owner);
     }
 
-    @DeleteMapping("/rental/{id}/delete")
-    public void deleteRental(@PathVariable Long id) {
-        rentalService.deleteRental(id);
+    @PutMapping("/rental/{id}/edit")
+    public RentalEntity editRental(@PathVariable Long id, @ModelAttribute RentalEntity rental) throws IOException {
+        return rentalService.editRental(id, rental);
     }
 }
