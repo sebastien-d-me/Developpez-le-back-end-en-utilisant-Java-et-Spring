@@ -21,8 +21,8 @@ public class RentalEntity {
     @Column(name="price")
     private String price;
 
-    @Column(name="picture")
-    private String picture;
+    @Column(name="picture_src")
+    private String pictureSrc;
 
     @Column(name="description")
     private String description;

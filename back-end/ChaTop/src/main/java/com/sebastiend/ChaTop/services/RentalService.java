@@ -1,9 +1,18 @@
 package com.sebastiend.ChaTop.services;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
@@ -29,8 +38,23 @@ public class RentalService {
         rentalRepository.deleteById(id);
     }
 
-    public RentalEntity saveRental(RentalEntity rental) {
-        RentalEntity savedRental = rentalRepository.save(rental);
-        return savedRental;
+    public RentalEntity saveRental(RentalEntity rental, MultipartFile picture) throws IOException {
+        RentalEntity newRental = new RentalEntity();
+        newRental.setName(rental.getName());
+        newRental.setSurface(rental.getSurface());
+        newRental.setPrice(rental.getPrice());
+        newRental.setDescription(rental.getDescription());
+        newRental.setOwnerId(1);
+        String uniqueID = UUID.randomUUID().toString().substring(0, 15);
+        byte[] bytes = picture.getBytes();
+        Path path = Paths.get("src/main/resources/uploads/rentals/" + uniqueID+"__"+picture.getOriginalFilename());
+        Files.write(path, bytes);
+        newRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        LocalDateTime currentDate = LocalDateTime.now();
+        newRental.setCreatedAt(dateFormatter.format(currentDate));
+        newRental.setUpdatedAt(dateFormatter.format(currentDate));
+        rentalRepository.save(newRental);
+        return newRental;
     }
 }
