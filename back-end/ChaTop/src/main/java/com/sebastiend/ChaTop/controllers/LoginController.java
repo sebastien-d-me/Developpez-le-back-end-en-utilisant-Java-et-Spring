@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sebastiend.ChaTop.services.JWTService;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
+@Tag(name = "Authentication", description = "All routes for the authentication.")
 public class LoginController {
 	private JWTService jwtService;
 	
@@ -18,6 +22,7 @@ public class LoginController {
 		this.jwtService = jwtService;
 	}
 	
+    @Operation(summary = "Login to the back-end", description = "Login to the back-end.", tags = { "Rentals" })
 	@PostMapping("/api/auth/login")
 	public Map<String, String> getToken(Authentication authentication) {
         Map<String, String> token = jwtService.generateToken(authentication);
