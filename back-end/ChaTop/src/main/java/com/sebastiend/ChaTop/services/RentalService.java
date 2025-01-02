@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,7 +34,7 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public RentalEntity saveRental(RentalEntity rental, MultipartFile picture, Integer owner) throws IOException {
+    public Map<String, String> saveRental(RentalEntity rental, MultipartFile picture, Integer owner) throws IOException {
         RentalEntity newRental = new RentalEntity();
         newRental.setName(rental.getName());
         newRental.setSurface(rental.getSurface());
@@ -50,10 +51,10 @@ public class RentalService {
         newRental.setCreatedAt(dateFormatter.format(currentDate));
         newRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(newRental);
-        return newRental;
+        return Map.of("message", "Rental created !");
     }
 
-    public RentalEntity editRental(final Long id, RentalEntity rental) throws IOException {
+    public Map<String, String> editRental(final Long id, RentalEntity rental) throws IOException {
         RentalEntity newRental = new RentalEntity();
         RentalEntity existRental = getRental(id).orElse(newRental);
         existRental.setName(rental.getName());
@@ -64,6 +65,6 @@ public class RentalService {
         LocalDateTime currentDate = LocalDateTime.now();
         existRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(existRental);
-        return existRental;
+        return Map.of("message", "Rental edited !");
     }
 }

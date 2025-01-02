@@ -16,19 +16,6 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Optional<MessageEntity> getMessage(final Long id) {
-        // Renvoyer un objet reformaté avec données utiles uniquement
-        return messageRepository.findById(id);
-    }
-
-    public Iterable<MessageEntity> getMessages() {
-        return messageRepository.findAll();
-    }
-
-    public void deleteMessage(final Long id) {
-        messageRepository.deleteById(id);
-    }
-
     public MessageEntity saveMessage(MessageEntity message) {
         MessageEntity savedMessage = messageRepository.save(message);
         return savedMessage;

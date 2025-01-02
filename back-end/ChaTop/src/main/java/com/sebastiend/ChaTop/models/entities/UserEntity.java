@@ -25,11 +25,9 @@ public class UserEntity {
     @Column(name="password")
     private String password;
 
-    @JsonIgnore
     @Column(name="created_at")
     private String createdAt;
 
-    @JsonIgnore
     @Column(name="updated_at")
     private String updatedAt;
 }

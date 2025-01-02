@@ -3,7 +3,6 @@ package com.sebastiend.ChaTop;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 @SpringBootApplication
 public class ChaTopApplication {
 	public static void main(String[] args) {

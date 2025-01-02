@@ -20,14 +20,6 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    public Iterable<UserEntity> getUsers() {
-        return userRepository.findAll();
-    }
-
-    public void deleteUser(final Long id) {
-        userRepository.deleteById(id);
-    }
-
     public UserEntity saveUser(UserEntity user) {
         UserEntity savedUser = userRepository.save(user);
         return savedUser;

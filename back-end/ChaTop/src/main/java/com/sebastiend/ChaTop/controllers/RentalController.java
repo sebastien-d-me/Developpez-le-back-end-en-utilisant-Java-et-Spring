@@ -1,6 +1,7 @@
 package com.sebastiend.ChaTop.controllers;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,12 +35,12 @@ public class RentalController {
     }
 
     @PostMapping("/api/rentals")
-    public RentalEntity createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture, @RequestParam("owner_id") Integer owner) throws IOException {
+    public Map<String, String> createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture, @RequestParam("owner_id") Integer owner) throws IOException {
         return rentalService.saveRental(rental, picture, owner);
     }
 
     @PutMapping("/api/rental/{id}")
-    public RentalEntity editRental(@PathVariable Long id, @ModelAttribute RentalEntity rental) throws IOException {
+    public Map<String, String> editRental(@PathVariable Long id, @ModelAttribute RentalEntity rental) throws IOException {
         return rentalService.editRental(id, rental);
     }
 }

@@ -19,9 +19,4 @@ public class UserController {
     public Optional<UserEntity> getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
-
-    @GetMapping("/api/users")
-    public Iterable<UserEntity> getUsers() {
-        return userService.getUsers();
-    }
 }

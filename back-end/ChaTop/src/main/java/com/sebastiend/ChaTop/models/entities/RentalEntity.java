@@ -32,11 +32,9 @@ public class RentalEntity {
     @Column(name="owner_id")
     private Integer ownerId;
 
-    @JsonIgnore
     @Column(name="created_at")
     private String createdAt;
 
-    @JsonIgnore
     @Column(name="updated_at")
     private String updatedAt;
 }
