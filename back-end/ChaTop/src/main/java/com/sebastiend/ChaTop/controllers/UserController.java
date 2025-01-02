@@ -15,12 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/api/users/{id}")
     public Optional<UserEntity> getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public Iterable<UserEntity> getUsers() {
         return userService.getUsers();
     }

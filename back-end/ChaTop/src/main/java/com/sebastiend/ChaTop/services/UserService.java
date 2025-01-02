@@ -17,7 +17,6 @@ public class UserService {
     private UserRepository userRepository;
 
     public Optional<UserEntity> getUser(final Long id) {
-        // Renvoyer un objet reformaté avec données utiles uniquement
         return userRepository.findById(id);
     }
 

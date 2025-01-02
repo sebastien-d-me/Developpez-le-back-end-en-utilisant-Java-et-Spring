@@ -12,7 +12,7 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @GetMapping("/messages")
+    @GetMapping("/api/messages")
     public Iterable<MessageEntity> getMessages() {
         return messageService.getMessages();
     }

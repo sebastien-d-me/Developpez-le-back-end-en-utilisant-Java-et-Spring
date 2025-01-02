@@ -23,22 +23,22 @@ public class RentalController {
     @Autowired
     private RentalService rentalService;
 
-    @GetMapping("/rental/{id}")
-    public Optional<RentalEntity> getRental(@PathVariable Long id) {
-        return rentalService.getRental(id);
-    }
-
-    @GetMapping("/rentals")
+    @GetMapping("/api/rentals")
     public Iterable<RentalEntity> getRentals() {
         return rentalService.getRentals();
     }
 
-    @PostMapping("/rentals/create")
+    @GetMapping("/api/rentals/{id}")
+    public Optional<RentalEntity> getRental(@PathVariable Long id) {
+        return rentalService.getRental(id);
+    }
+
+    @PostMapping("/api/rentals")
     public RentalEntity createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture, @RequestParam("owner_id") Integer owner) throws IOException {
         return rentalService.saveRental(rental, picture, owner);
     }
 
-    @PutMapping("/rental/{id}/edit")
+    @PutMapping("/api/rental/{id}")
     public RentalEntity editRental(@PathVariable Long id, @ModelAttribute RentalEntity rental) throws IOException {
         return rentalService.editRental(id, rental);
     }

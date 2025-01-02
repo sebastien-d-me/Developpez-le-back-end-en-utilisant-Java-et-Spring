@@ -26,7 +26,6 @@ public class RentalService {
     private RentalRepository rentalRepository;
 
     public Optional<RentalEntity> getRental(final Long id) {
-        // Renvoyer un objet reformaté avec données utiles uniquement
         return rentalRepository.findById(id);
     }
 

@@ -1,5 +1,7 @@
 package com.sebastiend.ChaTop.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -19,12 +21,15 @@ public class UserEntity {
     @Column(name="email")
     private String email;
 
+    @JsonIgnore
     @Column(name="password")
     private String password;
 
+    @JsonIgnore
     @Column(name="created_at")
     private String createdAt;
 
+    @JsonIgnore
     @Column(name="updated_at")
     private String updatedAt;
 }

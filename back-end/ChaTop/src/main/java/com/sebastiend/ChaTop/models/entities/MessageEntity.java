@@ -1,5 +1,7 @@
 package com.sebastiend.ChaTop.models.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 
 import lombok.Data;
@@ -22,9 +24,11 @@ public class MessageEntity {
     @Column(name="message")
     private String message;
 
+    @JsonIgnore
     @Column(name="created_at")
     private String createdAt;
 
+    @JsonIgnore
     @Column(name="updated_at")
     private String updatedAt;
 }
