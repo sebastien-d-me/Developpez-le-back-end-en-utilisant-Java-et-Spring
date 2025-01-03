@@ -43,6 +43,7 @@ public class RentalService {
         newRental.setOwnerId(owner);
         String uniqueID = UUID.randomUUID().toString().substring(0, 15);
         byte[] bytes = picture.getBytes();
+        // crée une variable pour le repertoire plutôt qu'en dur, mettre variable dans applications properties
         Path path = Paths.get("src/main/resources/uploads/rentals/" + uniqueID+"__"+picture.getOriginalFilename());
         Files.write(path, bytes);
         newRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());

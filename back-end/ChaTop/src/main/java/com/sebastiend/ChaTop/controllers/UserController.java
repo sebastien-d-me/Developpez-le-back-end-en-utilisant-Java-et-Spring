@@ -29,5 +29,6 @@ public class UserController {
     @GetMapping("/api/users/{id}")
     public Optional<UserEntity> getUser(@PathVariable Long id) {
         return userService.getUser(id);
+        // ne pas mettre l'entity dans le controller, DTO plutôt
     }
 }

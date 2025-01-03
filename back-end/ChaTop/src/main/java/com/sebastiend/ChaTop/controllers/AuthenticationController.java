@@ -22,8 +22,9 @@ public class AuthenticationController {
 		this.jwtService = jwtService;
 	}
 	
-    @Operation(summary = "Login to the back-end", description = "Login to the back-end.", tags = { "Rentals" })
+    @Operation(summary = "Login to the back-end", description = "Login to the back-end.", tags = { "Authentication" })
 	@PostMapping("/api/auth/login")
+    /* Cacher ou afficher ? */
 	public Map<String, String> getToken(Authentication authentication) {
         Map<String, String> token = jwtService.generateToken(authentication);
         return token;
