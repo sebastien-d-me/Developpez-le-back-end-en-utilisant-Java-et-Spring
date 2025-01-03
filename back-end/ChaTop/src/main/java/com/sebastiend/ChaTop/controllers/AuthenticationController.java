@@ -15,10 +15,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @Tag(name = "Authentication", description = "All routes for the authentication.")
-public class LoginController {
+public class AuthenticationController {
 	private JWTService jwtService;
 	
-	public LoginController(JWTService jwtService) {
+	public AuthenticationController(JWTService jwtService) {
 		this.jwtService = jwtService;
 	}
 	

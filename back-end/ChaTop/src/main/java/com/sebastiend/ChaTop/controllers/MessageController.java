@@ -16,6 +16,8 @@ import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -25,6 +27,11 @@ public class MessageController {
     private MessageService messageService;
 
     @Operation(summary = "Create a message", description = "Create a message.", tags = { "Messages" })
+    @ApiResponses(value = {
+		@ApiResponse(responseCode = "200", description = "OK"),
+        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+		@ApiResponse(responseCode = "400", description = "Bad Request")
+	})
     @PostMapping("/api/messages")
     public Map<String, String> createRental(@ModelAttribute MessageEntity message, @RequestParam("user_id") Integer user, @RequestParam("rental_id") Integer rental) throws IOException {
         return messageService.saveMessage(message, user, rental);

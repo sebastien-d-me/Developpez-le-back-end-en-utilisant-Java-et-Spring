@@ -2,6 +2,7 @@ package com.sebastiend.ChaTop.configurations;
 
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -23,7 +24,15 @@ import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
 
 @Configuration
+
 public class SpringSecurityConfig {
+    @Value("${spring.security.user.name}")
+    private String chatopAPIUsername;
+    @Value("${spring.security.user.password}")
+    private String chatopAPIPassword;
+    @Value("${JWTKey}")
+    private String JWTKey;
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {		
 		return http
@@ -37,7 +46,7 @@ public class SpringSecurityConfig {
 	
 	@Bean
 	public UserDetailsService users() {
-		UserDetails user = User.builder().username("user").password(passwordEncoder().encode("password")).roles("USER").build();		
+		UserDetails user = User.builder().username(chatopAPIUsername).password(passwordEncoder().encode(chatopAPIPassword)).roles("USER").build();		
 		return new InMemoryUserDetailsManager(user);
 	}
 
@@ -47,16 +56,14 @@ public class SpringSecurityConfig {
 		return new BCryptPasswordEncoder();
 	}
 
-    // Ne pas mettre la clé en ligne, utiliez variable environnement et la mettre en asymétrique
-    private String jwtKey = "fVNA5Tkvfb8xQsQGE6zDpV6YvS2rNb0R";
     @Bean
     public JwtDecoder jwtDecoder() {
-        SecretKeySpec secretKey = new SecretKeySpec(this.jwtKey.getBytes(), 0, this.jwtKey.getBytes().length,"RSA");
+        SecretKeySpec secretKey = new SecretKeySpec(this.JWTKey.getBytes(), 0, this.JWTKey.getBytes().length,"RSA");
         return NimbusJwtDecoder.withSecretKey(secretKey).macAlgorithm(MacAlgorithm.HS256).build();
     }
 
     @Bean
 	public JwtEncoder jwtEncoder() {
-		return new NimbusJwtEncoder(new ImmutableSecret<>(this.jwtKey.getBytes()));
+		return new NimbusJwtEncoder(new ImmutableSecret<>(this.JWTKey.getBytes()));
 	}
 }
