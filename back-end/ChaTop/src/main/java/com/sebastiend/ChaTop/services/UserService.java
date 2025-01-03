@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -34,7 +35,9 @@ public class UserService {
         UserEntity newUser = new UserEntity();
         newUser.setEmail(user.getEmail());
         newUser.setName(user.getName());
-        newUser.setPassword(user.getPassword());
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String password = passwordEncoder.encode(user.getPassword());
+        newUser.setPassword(password);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();
         newUser.setCreatedAt(dateFormatter.format(currentDate));

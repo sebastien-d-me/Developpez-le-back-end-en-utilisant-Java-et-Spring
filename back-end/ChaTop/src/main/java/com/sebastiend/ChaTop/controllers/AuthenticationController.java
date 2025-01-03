@@ -52,7 +52,7 @@ public class AuthenticationController {
 	}
 
     @Operation(summary = "Log in the user", description = "Log in the user.", tags = { "Authentication" })
-    @GetMapping("/api/auth/login")
+    @PostMapping("/api/auth/login")
 	public String loginUser() {
         return "b";
 	}
