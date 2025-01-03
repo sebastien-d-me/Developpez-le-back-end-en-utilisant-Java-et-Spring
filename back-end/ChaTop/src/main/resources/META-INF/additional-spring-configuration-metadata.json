@@ -1,5 +1,5 @@
 {"properties": [{
-  "name": "JWTKey",
+  "name": "jwt.key",
   "type": "java.lang.String",
   "description": "JWT Key for the security'"
 }]}

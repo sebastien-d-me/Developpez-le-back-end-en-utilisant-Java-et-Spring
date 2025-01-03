@@ -31,4 +31,5 @@ public class UserController {
         return userService.getUser(id);
         // ne pas mettre l'entity dans le controller, DTO plutôt
     }
+    
 }

@@ -30,7 +30,7 @@ public class SpringSecurityConfig {
     private String chatopAPIUsername;
     @Value("${spring.security.user.password}")
     private String chatopAPIPassword;
-    @Value("${JWTKey}")
+    @Value("${jwt.key}")
     private String JWTKey;
 
 	@Bean
