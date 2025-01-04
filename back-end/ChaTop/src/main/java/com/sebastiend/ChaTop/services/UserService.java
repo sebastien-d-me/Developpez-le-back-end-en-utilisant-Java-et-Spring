@@ -27,6 +27,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    private JWTService jwtService;
+
+	
+	public UserService(JWTService jwtService) {
+		this.jwtService = jwtService;
+	}
+
     public Optional<UserEntity> getUser(final Long id) {
         return userRepository.findById(id);
     }
@@ -43,6 +50,7 @@ public class UserService {
         newUser.setCreatedAt(dateFormatter.format(currentDate));
         newUser.setUpdatedAt(dateFormatter.format(currentDate));
         userRepository.save(newUser);
-        return Map.of("token", "TOKEN JWT");
+        String token = jwtService.generateTokenRegister(newUser);
+        return Map.of("token", token);
     }
 }

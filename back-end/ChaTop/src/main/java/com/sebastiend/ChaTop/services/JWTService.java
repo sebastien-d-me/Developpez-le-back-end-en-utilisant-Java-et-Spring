@@ -12,6 +12,8 @@ import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
 import org.springframework.stereotype.Service;
 
+import com.sebastiend.ChaTop.models.entities.UserEntity;
+
 
 @Service
 public class JWTService {
@@ -32,5 +34,18 @@ public class JWTService {
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
 		String JWTtoken =  this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
         return Map.of("JWT Token", JWTtoken);
+    }
+
+    public String generateTokenRegister(UserEntity user) {
+        Instant now = Instant.now();
+     	JwtClaimsSet claims = JwtClaimsSet.builder()
+            .issuer("self")
+            .issuedAt(now)
+            .expiresAt(now.plus(1, ChronoUnit.DAYS))
+            .subject(user.getEmail())
+            .build();
+		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
+		String JWTtoken =  this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
+        return JWTtoken;
     }
 }
