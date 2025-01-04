@@ -8,6 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
@@ -17,6 +19,7 @@ import com.sebastiend.ChaTop.services.RentalService;
 import com.sebastiend.ChaTop.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -53,8 +56,8 @@ public class AuthenticationController {
 
     @Operation(summary = "Log in the user", description = "Log in the user.", tags = { "Authentication" })
     @PostMapping("/api/auth/login")
-	public String loginUser() {
-        return "b";
+	public Map<String, String> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) {
+        return userService.loginUser(email, password);
 	}
 
     @Operation(summary = "Get the info of the current logged user", description = "Get the info of the current logged user.", tags = { "Authentication" })

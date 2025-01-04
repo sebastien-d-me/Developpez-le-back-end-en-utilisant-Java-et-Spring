@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -40,6 +41,7 @@ public class UserService {
 
     public Map<String, String> saveUser(UserEntity user) {
         UserEntity newUser = new UserEntity();
+        // verifier si pas de doublon de mail
         newUser.setEmail(user.getEmail());
         newUser.setName(user.getName());
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -51,6 +53,17 @@ public class UserService {
         newUser.setUpdatedAt(dateFormatter.format(currentDate));
         userRepository.save(newUser);
         String token = jwtService.generateTokenRegister(newUser);
+        return Map.of("token", token);
+    }
+
+    public Map<String, String> loginUser(String email, String password) {
+        UserEntity userCheck = userRepository.findByEmail(email);
+        // faire en sorte que les paramètres soit en post et pas en get (affiché dans l'URL)
+        if(userCheck == null) {
+            throw new UsernameNotFoundException("The user not exist");
+        }
+        System.out.println(userCheck);
+        String token = jwtService.generateTokenLogin(userCheck);
         return Map.of("token", token);
     }
 }
