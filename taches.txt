@@ -1,0 +1,9 @@
+TÂCHES :
+- verifier description longueur dans le sql
+- enlever après le hibernate le mysqldialect
+- ajouter les différentes réponses (200, 401, etc..)
+- prévoir dans le readme les variables d'environnement et comment generer sa clé jwt
+- bien relire les cours pour pouvoir définir les termes importants
+- ne pas mettre les entités dans le controller mais plutôt le dto
+- nettoyer le code
+- cacher le mot de passe lors des get

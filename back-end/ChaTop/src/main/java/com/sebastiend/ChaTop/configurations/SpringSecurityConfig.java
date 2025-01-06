@@ -34,6 +34,8 @@ public class SpringSecurityConfig {
     @Value("${jwt.key}")
     private String JWTKey;
 
+    // token autre pour la connexion admin a l'api
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {		
 		return http
