@@ -1,5 +1,12 @@
-{"properties": [{
-  "name": "jwt.key",
-  "type": "java.lang.String",
-  "description": "JWT Key for the security'"
-}]}
+{"properties": [
+  {
+    "name": "jwt.key",
+    "type": "java.lang.String",
+    "description": "JWT Key for the security"
+  },
+  {
+    "name": "rentals.upload.directory",
+    "type": "java.lang.String",
+    "description": "Upload rentals picture directory"
+  }
+]}

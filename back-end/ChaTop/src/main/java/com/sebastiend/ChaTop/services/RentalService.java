@@ -11,6 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -25,6 +26,9 @@ import lombok.Data;
 public class RentalService {
     @Autowired
     private RentalRepository rentalRepository;
+
+    @Value("${rentals.uploads.directory}")
+    private String rentalsUploadsDirectory;
 
     public Optional<RentalEntity> getRental(final Long id) {
         return rentalRepository.findById(id);
@@ -43,8 +47,7 @@ public class RentalService {
         newRental.setOwnerId(owner);
         String uniqueID = UUID.randomUUID().toString().substring(0, 15);
         byte[] bytes = picture.getBytes();
-        // crée une variable pour le repertoire plutôt qu'en dur, mettre variable dans applications properties
-        Path path = Paths.get("src/main/resources/uploads/rentals/" + uniqueID+"__"+picture.getOriginalFilename());
+        Path path = Paths.get(rentalsUploadsDirectory + uniqueID+"__"+picture.getOriginalFilename());
         Files.write(path, bytes);
         newRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
