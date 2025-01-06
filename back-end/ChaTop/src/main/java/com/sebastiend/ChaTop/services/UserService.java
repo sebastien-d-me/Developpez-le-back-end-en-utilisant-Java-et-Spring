@@ -1,22 +1,14 @@
 package com.sebastiend.ChaTop.services;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
-
+import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
@@ -56,14 +48,22 @@ public class UserService {
         return Map.of("token", token);
     }
 
-    public Map<String, String> loginUser(String email, String password) {
+    public Map<String, String> loginUser(String email, String password) throws AuthenticationException {
+        // verifier que pas vide
         UserEntity userCheck = userRepository.findByEmail(email);
         // faire en sorte que les paramètres soit en post et pas en get (affiché dans l'URL)
         if(userCheck == null) {
-            throw new UsernameNotFoundException("The user not exist");
+            return Map.of("message", "error");
         }
-        System.out.println(userCheck);
-        String token = jwtService.generateTokenLogin(userCheck);
-        return Map.of("token", token);
+
+        String passCheck = userCheck.getPassword();
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        
+        if(passwordEncoder.matches(password, passCheck)) {
+            String token = jwtService.generateTokenLogin(userCheck);
+            return Map.of("token", token);
+        } else {
+            return Map.of("message", "error");
+        }
     }
 }
