@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.JWTService;
 import com.sebastiend.ChaTop.services.RentalService;
 import com.sebastiend.ChaTop.services.UserService;
@@ -51,7 +53,8 @@ public class AuthenticationController {
         @ApiResponse(responseCode = "400", description = "Bad request")
     })
     @PostMapping("/api/auth/register")
-    public Map<String, String> registerUser(@ModelAttribute UserEntity user) {
+    public Map<String, String> registerUser(@RequestBody UserRegisterDTO userRegisterDTO) {
+        UserEntity user = UserMapperDTO.convertEntity(userRegisterDTO);
         return userService.saveUser(user);
     }
 

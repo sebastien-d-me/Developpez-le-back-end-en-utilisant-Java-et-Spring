@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sebastiend.ChaTop.models.dto.UserDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -27,8 +29,8 @@ public class UserController {
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
     @GetMapping("/api/users/{id}")
-    public Optional<UserEntity> getUser(@PathVariable Long id) {
-        return userService.getUser(id);
+    public Optional<UserDTO> getUser(@PathVariable Long id) {
+        return userService.getUser(id).map(UserMapperDTO::convertDTO);
         // ne pas mettre l'entity dans le controller, DTO plutôt
     }
     
