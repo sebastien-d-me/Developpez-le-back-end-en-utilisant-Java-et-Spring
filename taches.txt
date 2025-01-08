@@ -7,3 +7,5 @@ TÂCHES :
 - ne pas mettre les entités dans le controller mais plutôt le dto
 - nettoyer le code
 - cacher le mot de passe lors des get
+- expirer le token
+- mettre login et register dans nouveau controller

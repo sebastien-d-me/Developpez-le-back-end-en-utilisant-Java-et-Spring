@@ -23,9 +23,11 @@ public class JWTService {
 		this.jwtEncoder = jwtEncoder;
 	}
 	
-	public Map<String, String> generateToken(Authentication authentication) {
+	/*public String generateToken(Authentication authentication) {
+        System.out.println(authentication);
         Instant now = Instant.now();
      	JwtClaimsSet claims = JwtClaimsSet.builder()
+            .claim("email", authentication.getName())
             .issuer("self")
             .issuedAt(now)
             .expiresAt(now.plus(1, ChronoUnit.DAYS))
@@ -33,12 +35,13 @@ public class JWTService {
             .build();
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
 		String JWTtoken =  this.jwtEncoder.encode(jwtEncoderParameters).getTokenValue();
-        return Map.of("JWT Token", JWTtoken);
-    }
+        return JWTtoken;
+    }*/
 
     public String generateTokenRegister(UserEntity user) {
         Instant now = Instant.now();
      	JwtClaimsSet claims = JwtClaimsSet.builder()
+            .claim("email", user.getEmail())
             .issuer("self")
             .issuedAt(now)
             .expiresAt(now.plus(1, ChronoUnit.DAYS))
@@ -52,6 +55,7 @@ public class JWTService {
     public String generateTokenLogin(UserEntity user) {
         Instant now = Instant.now();
      	JwtClaimsSet claims = JwtClaimsSet.builder()
+            .claim("email", user.getEmail())
             .issuer("self")
             .issuedAt(now)
             .expiresAt(now.plus(1, ChronoUnit.DAYS))

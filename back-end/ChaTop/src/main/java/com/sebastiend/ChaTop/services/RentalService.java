@@ -12,12 +12,18 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
+import com.sebastiend.ChaTop.repositories.UserRepository;
 
 import lombok.Data;
 
@@ -26,6 +32,11 @@ import lombok.Data;
 public class RentalService {
     @Autowired
     private RentalRepository rentalRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    private JwtDecoder jwtDecoder;
 
     @Value("${rentals.uploads.directory}")
     private String rentalsUploadsDirectory;
@@ -38,13 +49,15 @@ public class RentalService {
         return rentalRepository.findAll();
     }
 
-    public Map<String, String> saveRental(RentalEntity rental, MultipartFile picture, Integer owner) throws IOException {
+    public Map<String, String> saveRental(RentalEntity rental, MultipartFile picture) throws IOException {
         RentalEntity newRental = new RentalEntity();
         newRental.setName(rental.getName());
         newRental.setSurface(rental.getSurface());
         newRental.setPrice(rental.getPrice());
         newRental.setDescription(rental.getDescription());
-        newRental.setOwnerId(owner);
+        String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepository.findByEmail(jwt);
+        newRental.setOwnerId(user.getId());
         String uniqueID = UUID.randomUUID().toString().substring(0, 15);
         byte[] bytes = picture.getBytes();
         Path path = Paths.get(rentalsUploadsDirectory + uniqueID+"__"+picture.getOriginalFilename());

@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Optional;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -58,7 +60,6 @@ public class UserService {
 
         String passCheck = userCheck.getPassword();
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        
         if(passwordEncoder.matches(password, passCheck)) {
             String token = jwtService.generateTokenLogin(userCheck);
             return Map.of("token", token);

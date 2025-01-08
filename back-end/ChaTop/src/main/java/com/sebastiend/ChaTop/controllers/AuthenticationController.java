@@ -33,20 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class AuthenticationController {
     @Autowired
     private UserService userService;
-    private JWTService jwtService;
-
     
-    public AuthenticationController(JWTService jwtService) {
-        this.jwtService = jwtService;
-    }
-    
-    @Operation(summary = "Login to the back-end", description = "Login to the back-end.", tags = { "Authentication" })
-    @PostMapping("/api/auth/back-end/login")
-    public Map<String, String> getToken(Authentication authentication) {
-        Map<String, String> token = jwtService.generateToken(authentication);
-        return token;
-    }
-
     @Operation(summary = "Create a new user account", description = "Create a new user account.", tags = { "Authentication" })
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "OK"),

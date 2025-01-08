@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.services.RentalService;
+import com.sebastiend.ChaTop.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class RentalController {
     @Autowired
     private RentalService rentalService;
+    private UserService userService;
 
     @Operation(summary = "Get all the rentals", description = "Get all the rentals.", tags = { "Rentals" })
     @ApiResponses(value = {
@@ -57,8 +60,8 @@ public class RentalController {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
-    public Map<String, String> createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture, @RequestParam("owner_id") Integer owner) throws IOException {
-        return rentalService.saveRental(rental, picture, owner);
+    public Map<String, String> createRental(@ModelAttribute RentalEntity rental, @RequestParam("picture") MultipartFile picture) throws IOException {
+        return rentalService.saveRental(rental, picture);
     }
 
     @Operation(summary = "Edit a rental", description = "Edit a rental.", tags = { "Rentals" })

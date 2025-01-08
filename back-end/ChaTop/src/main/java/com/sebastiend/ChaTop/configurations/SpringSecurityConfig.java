@@ -9,6 +9,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -22,19 +24,18 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.repositories.RentalRepository;
+import com.sebastiend.ChaTop.repositories.UserRepository;
 
 
 @Configuration
 @EnableWebSecurity
 public class SpringSecurityConfig {
-    @Value("${spring.security.user.name}")
-    private String chatopAPIUsername;
-    @Value("${spring.security.user.password}")
-    private String chatopAPIPassword;
     @Value("${jwt.key}")
     private String JWTKey;
 
-    // token autre pour la connexion admin a l'api
+    private UserRepository userRepository;
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {		
@@ -42,19 +43,18 @@ public class SpringSecurityConfig {
 			.csrf(csrf -> csrf.disable())
 			.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/register", "/api/auth/login", "/error").permitAll()
+                .requestMatchers("/api/auth/register", "/api/auth/login", "/v3/**", "/error").permitAll()
                 .anyRequest().authenticated())
 			.httpBasic(Customizer.withDefaults())
             .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
 			.build();		
 	}
 	
-	@Bean
+	/*@Bean
 	public UserDetailsService users() {
 		UserDetails user = User.builder().username(chatopAPIUsername).password(passwordEncoder().encode(chatopAPIPassword)).roles("USER").build();		
 		return new InMemoryUserDetailsManager(user);
-	}
-
+	}*/
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
