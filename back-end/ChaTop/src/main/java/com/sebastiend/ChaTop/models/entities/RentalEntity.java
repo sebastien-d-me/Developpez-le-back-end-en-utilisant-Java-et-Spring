@@ -1,5 +1,7 @@
 package com.sebastiend.ChaTop.models.entities;
 
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
@@ -29,8 +31,9 @@ public class RentalEntity {
     @Column(name="description")
     private String description;
 
-    @Column(name="owner_id")
-    private Long ownerId;
+    @ManyToOne
+    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    private UserEntity owner;
 
     @Column(name="created_at")
     private String createdAt;

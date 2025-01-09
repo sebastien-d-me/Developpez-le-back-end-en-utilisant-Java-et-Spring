@@ -9,10 +9,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
+import com.sebastiend.ChaTop.models.entities.RentalEntity;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.MessageRepository;
+import com.sebastiend.ChaTop.repositories.RentalRepository;
+import com.sebastiend.ChaTop.repositories.UserRepository;
 
 import lombok.Data;
 
@@ -22,11 +27,19 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepository;
 
-    public Map<String, String> saveMessage(MessageEntity message, Integer user, Integer rental) throws IOException {
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private RentalRepository rentaRepository;
+
+    public Map<String, String> saveMessage(MessageEntity message) throws IOException {
         MessageEntity newMessage = new MessageEntity();
         newMessage.setMessage(message.getMessage());
-        newMessage.setUserId(user);
-        newMessage.setRentalId(rental);
+        String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepository.findByEmail(jwt);
+        newMessage.setUser(user);
+        newMessage.setRental(message.getRental());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();
         newMessage.setCreatedAt(dateFormatter.format(currentDate));

@@ -33,7 +33,7 @@ public class MessageController {
 		@ApiResponse(responseCode = "400", description = "Bad Request")
 	})
     @PostMapping("/api/messages")
-    public Map<String, String> createRental(@ModelAttribute MessageEntity message, @RequestParam("user_id") Integer user, @RequestParam("rental_id") Integer rental) throws IOException {
-        return messageService.saveMessage(message, user, rental);
+    public Map<String, String> createRental(@ModelAttribute MessageEntity message) throws IOException {
+        return messageService.saveMessage(message);
     }
 }
