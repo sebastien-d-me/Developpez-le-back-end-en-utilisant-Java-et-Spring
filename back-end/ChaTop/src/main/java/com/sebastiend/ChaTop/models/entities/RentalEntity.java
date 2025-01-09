@@ -14,7 +14,7 @@ public class RentalEntity {
         
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT")
+    @Column(columnDefinition = "int")
     private Integer id;
 
     @Column(name="name")
@@ -33,7 +33,7 @@ public class RentalEntity {
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "owner_id", referencedColumnName = "id")
+    @JoinColumn(name = "owner_id", referencedColumnName = "id", columnDefinition = "int")
     private UserEntity owner;
 
     @Column(name="created_at")

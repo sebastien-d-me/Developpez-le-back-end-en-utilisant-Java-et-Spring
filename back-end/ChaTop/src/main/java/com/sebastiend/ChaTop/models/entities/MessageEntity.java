@@ -13,15 +13,15 @@ public class MessageEntity {
             
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "BIGINT")
+    @Column(columnDefinition = "int")
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "rental_id", referencedColumnName = "id")
+    @JoinColumn(name = "rental_id", referencedColumnName = "id", columnDefinition = "int")
     private RentalEntity rental;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "int")
     private UserEntity user;
 
     @Column(name="message", columnDefinition = "MEDIUMTEXT")
