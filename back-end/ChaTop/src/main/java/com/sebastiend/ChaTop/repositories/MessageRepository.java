@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 
 @Repository
-public interface MessageRepository extends CrudRepository<MessageEntity, Long> {
+public interface MessageRepository extends CrudRepository<MessageEntity, Integer> {
     
 }

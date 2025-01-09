@@ -29,7 +29,7 @@ public class UserController {
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
     @GetMapping("/api/users/{id}")
-    public Optional<UserDTO> getUser(@PathVariable Long id) {
+    public Optional<UserDTO> getUser(@PathVariable Integer id) {
         return userService.getUser(id).map(UserMapperDTO::convertDTO);
         // ne pas mettre l'entity dans le controller, DTO plutôt
     }

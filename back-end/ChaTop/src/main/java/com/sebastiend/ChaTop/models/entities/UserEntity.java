@@ -13,7 +13,8 @@ public class UserEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "BIGINT")
+    private Integer id;
 
     @Column(name="name")
     private String name;

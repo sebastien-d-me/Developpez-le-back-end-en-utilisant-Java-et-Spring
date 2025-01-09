@@ -50,7 +50,7 @@ public class RentalController {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
-    public Optional<RentalEntity> getRental(@PathVariable Long id) {
+    public Optional<RentalEntity> getRental(@PathVariable Integer id) {
         return rentalService.getRental(id);
     }
 
@@ -70,7 +70,7 @@ public class RentalController {
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
     @PutMapping("/api/rental/{id}")
-    public Map<String, String> editRental(@PathVariable Long id, @ModelAttribute RentalEntity rental) throws IOException {
+    public Map<String, String> editRental(@PathVariable Integer id, @ModelAttribute RentalEntity rental) throws IOException {
         return rentalService.editRental(id, rental);
     }
 }

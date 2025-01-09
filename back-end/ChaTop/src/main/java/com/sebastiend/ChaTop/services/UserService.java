@@ -29,7 +29,7 @@ public class UserService {
 		this.jwtService = jwtService;
 	}
 
-    public Optional<UserEntity> getUser(final Long id) {
+    public Optional<UserEntity> getUser(final Integer id) {
         return userRepository.findById(id);
     }
 

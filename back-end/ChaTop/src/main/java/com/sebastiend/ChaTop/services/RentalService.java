@@ -41,7 +41,7 @@ public class RentalService {
     @Value("${rentals.uploads.directory}")
     private String rentalsUploadsDirectory;
 
-    public Optional<RentalEntity> getRental(final Long id) {
+    public Optional<RentalEntity> getRental(final Integer id) {
         return rentalRepository.findById(id);
     }
 
@@ -78,7 +78,7 @@ public class RentalService {
         return Map.of("message", "Rental created !");
     }
 
-    public Map<String, String> editRental(final Long id, RentalEntity rental) throws IOException {
+    public Map<String, String> editRental(final Integer id, RentalEntity rental) throws IOException {
         RentalEntity newRental = new RentalEntity();
         RentalEntity existRental = getRental(id).orElse(newRental);
         existRental.setName(rental.getName());

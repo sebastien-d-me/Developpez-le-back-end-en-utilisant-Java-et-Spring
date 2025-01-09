@@ -13,7 +13,8 @@ public class MessageEntity {
             
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "BIGINT")
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "rental_id", referencedColumnName = "id")
@@ -23,7 +24,7 @@ public class MessageEntity {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity user;
 
-    @Column(name="message")
+    @Column(name="message", columnDefinition = "MEDIUMTEXT")
     private String message;
 
     @Column(name="created_at")

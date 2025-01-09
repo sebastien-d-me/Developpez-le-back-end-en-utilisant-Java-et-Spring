@@ -14,7 +14,8 @@ public class RentalEntity {
         
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column(columnDefinition = "BIGINT")
+    private Integer id;
 
     @Column(name="name")
     private String name;
@@ -28,7 +29,7 @@ public class RentalEntity {
     @Column(name="picture_src")
     private String pictureSrc;
 
-    @Column(name="description")
+    @Column(name="description", columnDefinition="MEDIUMTEXT")
     private String description;
 
     @ManyToOne
