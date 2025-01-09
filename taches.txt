@@ -1,11 +1,14 @@
 TÂCHES :
-- verifier description longueur dans le sql
-- enlever après le hibernate le mysqldialect
-- ajouter les différentes réponses (200, 401, etc..)
-- prévoir dans le readme les variables d'environnement et comment generer sa clé jwt
-- bien relire les cours pour pouvoir définir les termes importants
-- ne pas mettre les entités dans le controller mais plutôt le dto
-- nettoyer le code
-- cacher le mot de passe lors des get
-- expirer le token
-- mettre login et register dans nouveau controller
+    1 /
+        - Ajouter les différentes réponses (200, 401)
+        - Ajouter des vérificateurs de champs
+        - Ne pas mettre les entités dans le controlleur mais créer des DTO 
+        - Nettoyer le code dans son intégralité
+
+    2 /
+        - Vérifier la sécurité du projet (identifiants, clé de connexion)
+        - Ajouter une expiration du Token
+
+    3/
+        - Prévoir un fichier README bien organisé, présentant les variables d'environnements (BDD, JWT, etc.). Ainsi que démarrage du projet
+        - Déplacer le login et le register dans un nouveau controller 
