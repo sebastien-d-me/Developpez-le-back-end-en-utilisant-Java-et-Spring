@@ -17,6 +17,7 @@ import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
+import com.sebastiend.ChaTop.services.AuthenticationService;
 import com.sebastiend.ChaTop.services.JWTService;
 import com.sebastiend.ChaTop.services.RentalService;
 import com.sebastiend.ChaTop.services.UserService;
@@ -32,6 +33,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "Authentication", description = "All routes for the authentication.")
 public class AuthenticationController {
     @Autowired
+    private AuthenticationService authenticationService;
     private UserService userService;
     
     @Operation(summary = "Create a new user account", description = "Create a new user account.", tags = { "Authentication" })
@@ -42,13 +44,13 @@ public class AuthenticationController {
     @PostMapping("/api/auth/register")
     public Map<String, String> registerUser(@RequestBody UserRegisterDTO userRegisterDTO) {
         UserEntity user = UserMapperDTO.convertEntity(userRegisterDTO);
-        return userService.saveUser(user);
+        return authenticationService.saveUser(user);
     }
 
     @Operation(summary = "Log in the user", description = "Log in the user.", tags = { "Authentication" })
     @PostMapping("/api/auth/login")
     public Map<String, String> loginUser(@RequestParam("email") String email, @RequestParam("password") String password) throws AuthenticationException {
-        return userService.loginUser(email, password);
+        return authenticationService.loginUser(email, password);
 	}
 
     @Operation(summary = "Get the info of the current logged user", description = "Get the info of the current logged user.", tags = { "Authentication" })
