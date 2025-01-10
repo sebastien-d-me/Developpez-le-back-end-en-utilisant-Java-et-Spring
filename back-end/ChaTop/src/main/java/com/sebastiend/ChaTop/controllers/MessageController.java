@@ -18,6 +18,7 @@ import com.sebastiend.ChaTop.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -27,6 +28,7 @@ public class MessageController {
     private MessageService messageService;
 
     @Operation(summary = "Create a message", description = "Create a message.", tags = { "Messages" })
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "401", description = "Unauthorized"),

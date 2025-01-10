@@ -21,6 +21,7 @@ import com.sebastiend.ChaTop.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -35,6 +36,7 @@ public class RentalController {
     private UserService userService;
 
     @Operation(summary = "Get all the rentals", description = "Get all the rentals.", tags = { "Rentals" })
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
@@ -45,6 +47,7 @@ public class RentalController {
     }
 
     @Operation(summary = "Get a specific rental", description = "Get a specific rental.", tags = { "Rentals" })
+    @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/api/rentals/{id}")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
@@ -55,6 +58,7 @@ public class RentalController {
     }
 
     @Operation(summary = "Create a rental", description = "Create a rental.", tags = { "Rentals" })
+    @SecurityRequirement(name = "bearerAuth")
     @PostMapping("/api/rentals")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
@@ -65,11 +69,12 @@ public class RentalController {
     }
 
     @Operation(summary = "Edit a rental", description = "Edit a rental.", tags = { "Rentals" })
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
-    @PutMapping("/api/rental/{id}")
+    @PutMapping("/api/rentals/{id}")
     public Map<String, String> editRental(@PathVariable Integer id, @ModelAttribute RentalEntity rental) throws IOException {
         return rentalService.editRental(id, rental);
     }

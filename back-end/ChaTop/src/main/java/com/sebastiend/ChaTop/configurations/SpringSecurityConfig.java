@@ -28,9 +28,20 @@ import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeIn;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+
 
 @Configuration
 @EnableWebSecurity
+@SecurityScheme(
+    name = "bearerAuth",
+    scheme = "bearer",
+    bearerFormat = "JWT", 
+    type = SecuritySchemeType.HTTP, 
+    in = SecuritySchemeIn.HEADER
+)
 public class SpringSecurityConfig {
     @Value("${jwt.key}")
     private String JWTKey;
@@ -45,10 +56,10 @@ public class SpringSecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/auth/register", "/api/auth/login", "/v3/**", "/error").permitAll()
                 .anyRequest().authenticated())
-			.httpBasic(Customizer.withDefaults())
             .oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()))
 			.build();		
 	}
+    
 	
 	/*@Bean
 	public UserDetailsService users() {

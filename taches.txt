@@ -1,6 +1,6 @@
 TÂCHES :
     1 /
-        - Ajouter les différentes réponses (200, 401)
+        - Ajouter les différentes réponses (200, 204, 400, 401)
         - Ajouter des vérificateurs de champs
         - Ne pas mettre les entités dans le controlleur mais créer des DTO 
         - Nettoyer le code dans son intégralité
@@ -8,7 +8,7 @@ TÂCHES :
     2 /
         - Vérifier la sécurité du projet (identifiants, clé de connexion)
         - Ajouter une expiration du Token
+        - Améliorer la documentation
 
     3/
         - Prévoir un fichier README bien organisé, présentant les variables d'environnements (BDD, JWT, etc.). Ainsi que démarrage du projet
-        - Déplacer le login et le register dans un nouveau controller 

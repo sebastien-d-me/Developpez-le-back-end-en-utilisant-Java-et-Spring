@@ -15,6 +15,7 @@ import com.sebastiend.ChaTop.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
@@ -24,6 +25,7 @@ public class UserController {
     private UserService userService;
 
     @Operation(summary = "Get a specific user", description = "Get a specific user.", tags = { "Users" })
+    @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")

@@ -51,10 +51,9 @@ public class RentalService {
 
     public Map<String, String> saveRental(RentalEntity rental, MultipartFile picture) throws IOException {
         RentalEntity newRental = new RentalEntity();
-        if(rental.getName() == null || rental.getSurface() == null || rental.getPrice() == null || rental.getDescription() == null) {
+        if(rental.getName() == null || rental.getSurface() == null || rental.getPrice() == null || picture.getOriginalFilename() == "" || rental.getDescription() == null) {
             return Map.of("message", "Some fields are empty.");
         }
-        System.out.println(rental);
         newRental.setName(rental.getName());
         newRental.setSurface(rental.getSurface());
         newRental.setPrice(rental.getPrice());
