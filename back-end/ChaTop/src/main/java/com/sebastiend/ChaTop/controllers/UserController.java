@@ -32,8 +32,7 @@ public class UserController {
 	})
     @GetMapping("/api/users/{id}")
     public Optional<UserDTO> getUser(@PathVariable Integer id) {
-        return userService.getUser(id).map(UserMapperDTO::convertDTO);
-        // ne pas mettre l'entity dans le controller, DTO plutôt
+        return userService.getUser(id);
     }
     
 }

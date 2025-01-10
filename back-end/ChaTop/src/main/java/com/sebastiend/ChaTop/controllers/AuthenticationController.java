@@ -1,6 +1,7 @@
 package com.sebastiend.ChaTop.controllers;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sebastiend.ChaTop.models.dto.UserDTO;
 import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.AuthenticationService;
 import com.sebastiend.ChaTop.services.JWTService;
@@ -57,7 +60,7 @@ public class AuthenticationController {
     @Operation(summary = "Get the info of the current logged user", description = "Get the info of the current logged user.", tags = { "Authentication" })
     @SecurityRequirement(name = "bearerAuth")
     @GetMapping("/api/auth/me")
-	public String getMe() {
-        return "c";
+	public UserDTO getMe() {
+        return authenticationService.getMe();
 	}
 }

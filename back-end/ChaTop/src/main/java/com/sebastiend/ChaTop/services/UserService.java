@@ -11,7 +11,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import com.sebastiend.ChaTop.models.dto.UserDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
 import lombok.Data;
@@ -23,8 +26,8 @@ public class UserService {
     private UserRepository userRepository;
 
 
-    public Optional<UserEntity> getUser(final Integer id) {
-        return userRepository.findById(id);
+    public Optional<UserDTO> getUser(final Integer id) {
+        return userRepository.findById(id).map(UserMapperDTO::convertDTO);
     }
 
 }

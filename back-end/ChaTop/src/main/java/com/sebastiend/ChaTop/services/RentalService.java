@@ -6,9 +6,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,8 +22,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sebastiend.ChaTop.models.dto.RentalDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
@@ -41,19 +45,19 @@ public class RentalService {
     @Value("${rentals.uploads.directory}")
     private String rentalsUploadsDirectory;
 
-    public Optional<RentalEntity> getRental(final Integer id) {
-        return rentalRepository.findById(id);
+    public Optional<RentalDTO> getRental(final Integer id) {
+        return rentalRepository.findById(id).map(RentalMapperDTO::convertDTO);
     }
 
-    public Iterable<RentalEntity> getRentals() {
-        return rentalRepository.findAll();
+    public List<RentalDTO> getRentals() {
+        return rentalRepository.findAll().stream().map(RentalMapperDTO::convertDTO).collect(Collectors.toList());
     }
 
-    public Map<String, String> saveRental(RentalEntity rental, MultipartFile picture) throws IOException {
-        RentalEntity newRental = new RentalEntity();
+    public Map<String, String> saveRental(RentalDTO rental, MultipartFile picture) throws IOException {
         if(rental.getName() == null || rental.getSurface() == null || rental.getPrice() == null || picture.getOriginalFilename() == "" || rental.getDescription() == null) {
             return Map.of("message", "Some fields are empty.");
         }
+        RentalEntity newRental = new RentalEntity();
         newRental.setName(rental.getName());
         newRental.setSurface(rental.getSurface());
         newRental.setPrice(rental.getPrice());
@@ -77,13 +81,14 @@ public class RentalService {
         return Map.of("message", "Rental created !");
     }
 
-    public Map<String, String> editRental(final Integer id, RentalEntity rental) throws IOException {
+    public Map<String, String> editRental(final Integer id, RentalDTO rental) throws IOException {
         RentalEntity newRental = new RentalEntity();
-        RentalEntity existRental = getRental(id).orElse(newRental);
+        RentalEntity existRental = rentalRepository.findById(id).orElse(newRental);
         existRental.setName(rental.getName());
         existRental.setSurface(rental.getSurface());
         existRental.setPrice(rental.getPrice());
         existRental.setDescription(rental.getDescription());
+        existRental.setOwner(existRental.getOwner());
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();
         existRental.setUpdatedAt(dateFormatter.format(currentDate));
