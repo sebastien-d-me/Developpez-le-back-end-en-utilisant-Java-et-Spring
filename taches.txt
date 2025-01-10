@@ -9,6 +9,7 @@ TÂCHES :
         - Vérifier la sécurité du projet (identifiants, clé de connexion)
         - Ajouter une expiration du Token
         - Améliorer la documentation
+        - Enlever les fichiers doublons des images
 
     3/
         - Prévoir un fichier README bien organisé, présentant les variables d'environnements (BDD, JWT, etc.). Ainsi que démarrage du projet

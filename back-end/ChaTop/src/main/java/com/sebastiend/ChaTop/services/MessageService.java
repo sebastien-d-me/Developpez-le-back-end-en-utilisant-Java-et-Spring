@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.sebastiend.ChaTop.models.dto.MessageDTO;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
@@ -33,7 +34,7 @@ public class MessageService {
     @Autowired
     private RentalRepository rentaRepository;
 
-    public Map<String, String> saveMessage(MessageEntity message) throws IOException {
+    public Map<String, String> saveMessage(MessageDTO message) throws IOException {
         MessageEntity newMessage = new MessageEntity();
         newMessage.setMessage(message.getMessage());
         String jwt = SecurityContextHolder.getContext().getAuthentication().getName();

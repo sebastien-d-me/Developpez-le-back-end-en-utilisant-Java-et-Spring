@@ -11,11 +11,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sebastiend.ChaTop.models.dto.MessageDTO;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -35,7 +37,7 @@ public class MessageController {
 		@ApiResponse(responseCode = "400", description = "Bad Request")
 	})
     @PostMapping("/api/messages")
-    public Map<String, String> createRental(@ModelAttribute MessageEntity message) throws IOException {
+    public Map<String, String> createRental(@RequestBody MessageDTO message) throws IOException {
         return messageService.saveMessage(message);
     }
 }
