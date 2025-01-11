@@ -13,7 +13,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.sebastiend.ChaTop.models.dto.UserDTO;
+import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
+import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.UserLoginMapperDTO;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 
@@ -33,8 +36,8 @@ public class AuthenticationService {
 		this.jwtService = jwtService;
 	}
 
-    public Map<String, String> saveUser(UserEntity user) {
-       
+    public Map<String, String> saveUser(UserRegisterDTO userRegisterDTO) {
+        UserEntity user = UserMapperDTO.convertEntity(userRegisterDTO);
         UserEntity userCheck = userRepository.findByEmail(user.getEmail());
         if(userCheck != null) {
             return Map.of("message", "A user already exist with this email.");
@@ -56,12 +59,14 @@ public class AuthenticationService {
         return Map.of("token", token);
     }
 
-    public Map<String, String> loginUser(String email, String password) throws AuthenticationException {
+    public Map<String, String> loginUser(UserLoginDTO userLogin) throws AuthenticationException {
+        String email = userLogin.getEmail();
+        String password = userLogin.getPassword();
         // verifier que pas vide
         UserEntity userCheck = userRepository.findByEmail(email);
         // faire en sorte que les paramètres soit en post et pas en get (affiché dans l'URL)
         if(userCheck == null) {
-            return Map.of("message", "error");
+            return Map.of("message", "error no exist");
         }
 
         String passCheck = userCheck.getPassword();
@@ -70,7 +75,7 @@ public class AuthenticationService {
             String token = jwtService.generateTokenLogin(userCheck);
             return Map.of("token", token);
         } else {
-            return Map.of("message", "error");
+            return Map.of("message", "error passowrd");
         }
     }
 

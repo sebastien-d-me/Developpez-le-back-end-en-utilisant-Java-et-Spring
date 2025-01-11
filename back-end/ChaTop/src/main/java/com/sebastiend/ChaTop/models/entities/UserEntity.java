@@ -1,6 +1,7 @@
 package com.sebastiend.ChaTop.models.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.*;
 
@@ -20,9 +21,11 @@ public class UserEntity {
     private String name;
 
     @Column(name="email")
+    @JsonProperty(value = "email")
     private String email;
 
     @Column(name="password")
+    @JsonProperty(value = "password")
     private String password;
 
     @Column(name="created_at")

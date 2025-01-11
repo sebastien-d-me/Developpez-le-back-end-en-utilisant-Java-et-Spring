@@ -82,8 +82,7 @@ public class RentalService {
     }
 
     public Map<String, String> editRental(final Integer id, RentalDTO rental) throws IOException {
-        RentalEntity newRental = new RentalEntity();
-        RentalEntity existRental = rentalRepository.findById(id).orElse(newRental);
+        RentalEntity existRental = rentalRepository.findById(id).get();
         existRental.setName(rental.getName());
         existRental.setSurface(rental.getSurface());
         existRental.setPrice(rental.getPrice());

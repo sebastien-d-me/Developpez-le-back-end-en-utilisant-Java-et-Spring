@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.dto.MessageDTO;
-import com.sebastiend.ChaTop.models.entities.MessageEntity;
-import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;

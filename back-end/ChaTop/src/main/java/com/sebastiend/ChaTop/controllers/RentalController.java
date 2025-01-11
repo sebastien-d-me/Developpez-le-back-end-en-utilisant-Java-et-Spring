@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.sebastiend.ChaTop.models.dto.RentalDTO;
-import com.sebastiend.ChaTop.models.entities.RentalEntity;
-import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.RentalService;

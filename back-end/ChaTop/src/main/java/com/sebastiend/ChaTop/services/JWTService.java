@@ -44,7 +44,7 @@ public class JWTService {
             .claim("email", user.getEmail())
             .issuer("self")
             .issuedAt(now)
-            .expiresAt(now.plus(1, ChronoUnit.DAYS))
+            .expiresAt(now.plus(1, ChronoUnit.HOURS))
             .subject(user.getEmail())
             .build();
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);
@@ -58,7 +58,7 @@ public class JWTService {
             .claim("email", user.getEmail())
             .issuer("self")
             .issuedAt(now)
-            .expiresAt(now.plus(1, ChronoUnit.DAYS))
+            .expiresAt(now.plus(1, ChronoUnit.HOURS))
             .subject(user.getEmail())
             .build();
 		JwtEncoderParameters jwtEncoderParameters = JwtEncoderParameters.from(JwsHeader.with(MacAlgorithm.HS256).build(), claims);

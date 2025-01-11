@@ -24,7 +24,6 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
-import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
 

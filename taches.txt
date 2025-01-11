@@ -1,15 +1,13 @@
 TÂCHES :
 1 /
 - Ajouter les différentes réponses (200, 204, 400, 401)
-- Ajouter des vérificateurs de champs
+- Ajouter des vérificateurs de champs / Réponse adapté (vide, erreurs)
 - Ne pas mettre les entités dans le controlleur mais créer des DTO 
 - Nettoyer le code dans son intégralité
 
 2 /
-- Vérifier la sécurité du projet (identifiants, clé de connexion)
-- Ajouter une expiration du Token
 - Améliorer la documentation
-- Enlever les fichiers doublons des images
+- Vérifier conformité mockoon
 
 3/
 - Prévoir un fichier README bien organisé, présentant les variables 
