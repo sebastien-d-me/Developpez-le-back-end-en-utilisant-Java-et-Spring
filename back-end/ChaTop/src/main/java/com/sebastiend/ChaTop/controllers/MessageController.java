@@ -15,7 +15,7 @@ import com.sebastiend.ChaTop.models.dto.MessageDTO;
 import com.sebastiend.ChaTop.services.MessageService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -32,7 +32,10 @@ public class MessageController {
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK"),
         @ApiResponse(responseCode = "401", description = "Unauthorized"),
-		@ApiResponse(responseCode = "400", description = "Bad Request")
+		@ApiResponse(responseCode = "400", description = "Bad Request", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{}")
+        ))
 	})
     @PostMapping("/api/messages")
     public Map<String, String> createRental(@RequestBody MessageDTO message) throws IOException {

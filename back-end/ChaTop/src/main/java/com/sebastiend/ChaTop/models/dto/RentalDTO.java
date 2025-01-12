@@ -1,5 +1,7 @@
 package com.sebastiend.ChaTop.models.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
 
@@ -13,7 +15,4 @@ public class RentalDTO {
     private String price;
     private String pictureSrc;
     private String description;
-    private Integer owner;
-    private String createdAt;
-    private String updatedAt;
 }

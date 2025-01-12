@@ -16,6 +16,8 @@ import com.sebastiend.ChaTop.models.dto.MessageDTO;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.mappers.MessageMapperDTO;
+import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.repositories.MessageRepository;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
@@ -34,13 +36,14 @@ public class MessageService {
     @Autowired
     private RentalRepository rentaRepository;
 
-    public Map<String, String> saveMessage(MessageDTO message) throws IOException {
+    public Map<String, String> saveMessage(MessageDTO messageDTO) throws IOException {
         MessageEntity newMessage = new MessageEntity();
-        newMessage.setMessage(message.getMessage());
+        newMessage.setMessage(messageDTO.getMessage());
         String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity user = userRepository.findByEmail(jwt);
+        RentalEntity rental = rentaRepository.findById(messageDTO.getRental()).orElse(null);
         newMessage.setUser(user);
-        newMessage.setRental(message.getRental());
+        newMessage.setRental(rental);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();
         newMessage.setCreatedAt(dateFormatter.format(currentDate));

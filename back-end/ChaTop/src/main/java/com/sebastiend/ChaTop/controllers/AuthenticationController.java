@@ -50,7 +50,18 @@ public class AuthenticationController {
         return authenticationService.saveUser(userRegisterDTO);
     }
 
+    
     @Operation(summary = "Log in the user", description = "Log in the user.", tags = { "Authentication" })
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c\"}")
+        )),
+        @ApiResponse(responseCode = "401", description = "Bad request", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\": \"error\"}")
+        )),
+    })
     @PostMapping("/api/auth/login")
     public Map<String, String> loginUser(@RequestBody UserLoginDTO userLogin) throws AuthenticationException {
         return authenticationService.loginUser(userLogin);

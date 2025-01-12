@@ -21,6 +21,7 @@ import com.sebastiend.ChaTop.services.RentalService;
 import com.sebastiend.ChaTop.services.UserService;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -66,7 +67,7 @@ public class RentalController {
 		@ApiResponse(responseCode = "200", description = "OK"),
 		@ApiResponse(responseCode = "401", description = "Unauthorized")
 	})
-    public Map<String, String> createRental(@ModelAttribute RentalDTO rental, @RequestParam("picture") MultipartFile picture) throws IOException {
+    public Map<String, String> createRental(@ModelAttribute RentalDTO rental, @Parameter(hidden = true) @RequestParam("picture") MultipartFile picture) throws IOException {
         return rentalService.saveRental(rental, picture);
     }
 
