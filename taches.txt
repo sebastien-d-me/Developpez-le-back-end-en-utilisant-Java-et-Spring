@@ -3,12 +3,12 @@ TÂCHES :
 - Ajouter les différentes réponses (200, 204, 400, 401)
 - Ajouter des vérificateurs de champs / Réponse adapté (vide, erreurs)
 - Ne pas mettre les entités dans le controlleur mais créer des DTO 
+- Tout vérifier
 - Nettoyer le code dans son intégralité
 
 2 /
-- Améliorer la documentation
 - Vérifier conformité mockoon
 
 3/
 - Prévoir un fichier README bien organisé, présentant les variables 
-d'environnements (BDD, JWT, etc.). Ainsi que démarrage du projet
+d'environnements (BDD, JWT, etc.). Ainsi que démarrage du projet et logiciels

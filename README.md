@@ -53,3 +53,37 @@ https://learning.postman.com/docs/getting-started/importing-and-exporting-data/#
 ### MySQL
 
 SQL script for creating the schema is available `ressources/sql/script.sql`
+
+
+# ChâTop
+Développez le back-end en utilisant Java et Spring
+
+### Téléchargement
+1. Téléchargez ou clonez le projet.
+2. Nécessite les éléments suivants :
+    - Angular 14
+    - Apache Maven
+    - Java 11 ou 17
+    - NodeJS
+    - PHP
+    - PHPMyAdmin
+
+### Installation
+1. Effectuez la commande : `npm install` à la racine
+2. Effectuez la commande : `npm run build` à la racine
+3. Effectuez la commande : `php bin/console doctrine:database:create` à la racine du projet
+4. Effectuez la commande : `php bin/console make:migration` à la racine du projet
+5. Effectuez la commande : `php bin/console doctrine:migrations:migrate` à la racine du projet
+6. Effectuez la commande : `php bin/console doctrine:fixtures:load` à la racine du projet
+7. Lancez le projet avec la commande : `symfony serve`
+
+### Configuration
+1. Configurez le fichier .env
+2. Effectuez la commande : `composer install` à la racine
+3. Effectuez la commande : `npm install` à la racine
+4. Effectuez la commande : `npm run build` à la racine
+5. Effectuez la commande : `php bin/console doctrine:database:create` à la racine du projet
+6. Effectuez la commande : `php bin/console make:migration` à la racine du projet
+7. Effectuez la commande : `php bin/console doctrine:migrations:migrate` à la racine du projet
+8. Effectuez la commande : `php bin/console doctrine:fixtures:load` à la racine du projet
+9. Lancez le projet avec la commande : `symfony serve`
