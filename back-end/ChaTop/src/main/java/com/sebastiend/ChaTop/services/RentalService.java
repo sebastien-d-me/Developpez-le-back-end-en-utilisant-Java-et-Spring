@@ -22,7 +22,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sebastiend.ChaTop.models.dto.RentalCreateDTO;
 import com.sebastiend.ChaTop.models.dto.RentalDTO;
+import com.sebastiend.ChaTop.models.dto.RentalUpdateDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
@@ -53,7 +55,7 @@ public class RentalService {
         return rentalRepository.findAll().stream().map(RentalMapperDTO::convertDTO).collect(Collectors.toList());
     }
 
-    public Map<String, String> saveRental(RentalDTO rental, MultipartFile picture) throws IOException {
+    public Map<String, String> saveRental(RentalCreateDTO rental, MultipartFile picture) throws IOException {
         if(rental.getName() == null || rental.getSurface() == null || rental.getPrice() == null || picture.getOriginalFilename() == "" || rental.getDescription() == null) {
             return Map.of("message", "Some fields are empty.");
         }
@@ -81,7 +83,7 @@ public class RentalService {
         return Map.of("message", "Rental created !");
     }
 
-    public Map<String, String> editRental(final Integer id, RentalDTO rental) throws IOException {
+    public Map<String, String> editRental(final Integer id, RentalUpdateDTO rental) throws IOException {
         RentalEntity existRental = rentalRepository.findById(id).get();
         existRental.setName(rental.getName());
         existRental.setSurface(rental.getSurface());

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sebastiend.ChaTop.models.dto.RentalCreateDTO;
 import com.sebastiend.ChaTop.models.dto.RentalDTO;
+import com.sebastiend.ChaTop.models.dto.RentalUpdateDTO;
 import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.RentalService;
@@ -122,7 +124,7 @@ public class RentalController {
             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "")
         ))
 	})
-    public Map<String, String> createRental(@ModelAttribute RentalDTO rental, @Parameter(hidden = true) @RequestParam("picture") MultipartFile picture) throws IOException {
+    public Map<String, String> createRental(@ModelAttribute RentalCreateDTO rental, @Parameter(hidden = true) @RequestParam("picture") MultipartFile picture) throws IOException {
         return rentalService.saveRental(rental, picture);
     }
 
@@ -139,7 +141,7 @@ public class RentalController {
         ))
 	})
     @PutMapping("/api/rentals/{id}")
-    public Map<String, String> editRental(@PathVariable Integer id, @ModelAttribute RentalDTO rental) throws IOException {
+    public Map<String, String> editRental(@PathVariable Integer id, @ModelAttribute RentalUpdateDTO rental) throws IOException {
         return rentalService.editRental(id, rental);
     }
 }
