@@ -21,10 +21,10 @@ public class RentalEntity {
     private String name;
 
     @Column(name="surface")
-    private String surface;
+    private Integer surface;
 
     @Column(name="price")
-    private String price;
+    private Integer price;
 
     @Column(name="picture_src")
     private String pictureSrc;

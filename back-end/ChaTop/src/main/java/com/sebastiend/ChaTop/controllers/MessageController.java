@@ -30,8 +30,14 @@ public class MessageController {
     @Operation(summary = "Create a message", description = "Create a message.", tags = { "Messages" })
     @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "OK"),
-        @ApiResponse(responseCode = "401", description = "Unauthorized"),
+		@ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{\"message\": \"Message send with success\"}")
+        )),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "")
+        )),
 		@ApiResponse(responseCode = "400", description = "Bad Request", content = @io.swagger.v3.oas.annotations.media.Content(
             mediaType = "application/json",
             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "{}")

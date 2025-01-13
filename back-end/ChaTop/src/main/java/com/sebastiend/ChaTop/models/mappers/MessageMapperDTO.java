@@ -11,6 +11,7 @@ public class MessageMapperDTO {
         MessageDTO messageDTO = new MessageDTO();
         messageDTO.setRental(message.getRental().getId());
         messageDTO.setUser(message.getUser().getId());
+        messageDTO.setMessage(message.getMessage());
         return messageDTO;
     }
 }

@@ -26,8 +26,22 @@ public class UserController {
     @Operation(summary = "Get a specific user", description = "Get a specific user.", tags = { "Users" })
     @SecurityRequirement(name = "bearerAuth")
     @ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "OK"),
-		@ApiResponse(responseCode = "401", description = "Unauthorized")
+		@ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = 
+            "{\n"+
+                "  \"id\": 1,\n"+
+                "  \"name\": \"test TEST\",\n"+
+                "  \"email\": \"test@testa.com\",\n"+
+                "  \"createdAt\": \"2025-01-13 20:36:38\",\n"+
+                "  \"updatedAt\": \"2025-01-13 20:36:38\"\n"+
+            "}"
+            )
+        )),
+		@ApiResponse(responseCode = "401", description = "Unauthorized", content = @io.swagger.v3.oas.annotations.media.Content(
+            mediaType = "application/json",
+            examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "")
+        )),
 	})
     @GetMapping("/api/users/{id}")
     public Optional<UserDTO> getUser(@PathVariable Integer id) {
