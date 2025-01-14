@@ -21,10 +21,11 @@ Développez le back-end en utilisant Java et Spring
 1.2 `SPRING_DATASOURCE_USERNAME` ayant pour valeur l'identifiant d'accès à votre base de données
 1.3 `SPRING_DATASOURCE_PASSWORD` ayant pour valeur le mot de passe d'accès à votre base de données
 2. Configurez le fichier `application.properties`:
-2.1 Mettez vos informations de base de données
+2.1 Mettez vos informations de base de données (pensez à la créer sur PhpMyAdmin)
 2.2 Choississez le répertoire où seront stockés vos photos (vous pouvez laissez tel quel)
 3. Importez sur votre base de données le fichier SQL présent dans `ressources/sql/script.sql`
 
 ### ✅ Démarrage ✅
 1. Effectuez la commande : `npm run start` à la racine
 2. Effectuez la commande `mvn spring-boot:run` dans le répertoire back-end/Chatop
+3. En cas de besoin, l'URL du Swagger est la suivante : http://127.0.0.1:8080/v3/swagger-ui/index.html

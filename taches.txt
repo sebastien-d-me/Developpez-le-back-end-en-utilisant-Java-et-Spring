@@ -1,5 +1,4 @@
 TÂCHES :
 1 /
-- Tout vérifier
 - Nettoyer le code dans son intégralité
 - Tout vérifier
