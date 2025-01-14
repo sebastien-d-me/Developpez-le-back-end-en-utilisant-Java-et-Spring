@@ -1,16 +1,14 @@
 package com.sebastiend.ChaTop.models.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
-
 import lombok.Data;
+
 
 @Data
 @Entity
 @Table(name = "messages")
-public class MessageEntity {
-            
+public class MessageEntity {  
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int")

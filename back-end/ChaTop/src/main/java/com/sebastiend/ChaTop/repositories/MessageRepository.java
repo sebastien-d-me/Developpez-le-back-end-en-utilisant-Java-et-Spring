@@ -1,11 +1,10 @@
 package com.sebastiend.ChaTop.repositories;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.data.repository.CrudRepository;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 
+
 @Repository
-public interface MessageRepository extends CrudRepository<MessageEntity, Integer> {
-    
-}
+public interface MessageRepository extends CrudRepository<MessageEntity, Integer> {}

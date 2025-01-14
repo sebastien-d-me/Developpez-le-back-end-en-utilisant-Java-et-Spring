@@ -1,17 +1,14 @@
 package com.sebastiend.ChaTop.models.entities;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
 
 @Data
 @Entity
 @Table(name = "rentals")
 public class RentalEntity {
-        
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "int")
