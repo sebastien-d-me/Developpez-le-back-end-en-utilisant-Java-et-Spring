@@ -9,7 +9,6 @@ import lombok.Data;
 
 @Data
 public class RentalUpdateDTO {
-    private Integer id;
     private String name;
     private Integer surface;
     private Integer price;
