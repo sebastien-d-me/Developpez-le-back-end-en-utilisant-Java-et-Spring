@@ -84,10 +84,11 @@ public class RentalService {
     }
 
     public Map<String, String> editRental(final Integer id, String name, String surface, String price, MultipartFile picture, String description, RentalUpdateDTO rental) throws IOException {
-        RentalEntity existRental = rentalRepository.findById(id).get();
-        if(existRental == null) {
+        Optional<RentalEntity> checkExist = rentalRepository.findById(id);
+        if(!checkExist.isPresent()) {
             return Map.of("message", "The rental not exist");
         }
+        RentalEntity existRental = rentalRepository.findById(id).get();
         if(name != null) {
             existRental.setName(rental.getName());
         }
