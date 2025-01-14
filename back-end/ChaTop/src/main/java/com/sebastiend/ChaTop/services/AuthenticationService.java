@@ -37,6 +37,9 @@ public class AuthenticationService {
 	}
 
     public Map<String, String> saveUser(UserRegisterDTO userRegisterDTO) {
+        if(userRegisterDTO.getName() == null || userRegisterDTO.getEmail() == null || userRegisterDTO.getPassword() == null) {
+            return Map.of("message", "Some fields are empty.");
+        }
         UserEntity user = UserMapperDTO.convertEntity(userRegisterDTO);
         UserEntity userCheck = userRepository.findByEmail(user.getEmail());
         if(userCheck != null) {
@@ -60,6 +63,9 @@ public class AuthenticationService {
     }
 
     public Map<String, String> loginUser(UserLoginDTO userLogin) throws AuthenticationException {
+        if(userLogin.getEmail() == null || userLogin.getPassword() == null) {
+            return Map.of("message", "Some fields are empty.");
+        }
         String email = userLogin.getEmail();
         String password = userLogin.getPassword();
         // verifier que pas vide

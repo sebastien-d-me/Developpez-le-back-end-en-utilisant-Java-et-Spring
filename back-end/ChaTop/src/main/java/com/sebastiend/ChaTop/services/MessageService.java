@@ -37,6 +37,9 @@ public class MessageService {
     private RentalRepository rentaRepository;
 
     public Map<String, String> saveMessage(MessageDTO messageDTO) throws IOException {
+        if(messageDTO.getMessage() == null || messageDTO.getRental() == null) {
+            return Map.of("message", "Some fields are empty.");
+        }
         MessageEntity newMessage = new MessageEntity();
         newMessage.setMessage(messageDTO.getMessage());
         String jwt = SecurityContextHolder.getContext().getAuthentication().getName();

@@ -1,6 +1,5 @@
 TÂCHES :
 1 /
-- Ajouter les différentes réponses (200, 204, 400, 401)
 - Ajouter des vérificateurs de champs / Réponse adapté (vide, erreurs)
-- Tout vérifier
 - Nettoyer le code dans son intégralité
+- Tout vérifier

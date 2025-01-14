@@ -55,8 +55,8 @@ public class RentalService {
         return rentalRepository.findAll().stream().map(RentalMapperDTO::convertDTO).collect(Collectors.toList());
     }
 
-    public Map<String, String> saveRental(RentalCreateDTO rental, MultipartFile picture) throws IOException {
-        if(rental.getName() == null || rental.getSurface() == null || rental.getPrice() == null || picture.getOriginalFilename() == "" || rental.getDescription() == null) {
+    public Map<String, String> saveRental(String name, String surface, String price, MultipartFile picture, String description, RentalCreateDTO rental) throws IOException {
+        if(name == null || surface == null || price == null || picture.getOriginalFilename() == "" || description == null) {
             return Map.of("message", "Some fields are empty.");
         }
         RentalEntity newRental = new RentalEntity();
@@ -83,13 +83,39 @@ public class RentalService {
         return Map.of("message", "Rental created !");
     }
 
-    public Map<String, String> editRental(final Integer id, RentalUpdateDTO rental) throws IOException {
+    public Map<String, String> editRental(final Integer id, String name, String surface, String price, MultipartFile picture, String description, RentalUpdateDTO rental) throws IOException {
         RentalEntity existRental = rentalRepository.findById(id).get();
-        existRental.setName(rental.getName());
-        existRental.setSurface(rental.getSurface());
-        existRental.setPrice(rental.getPrice());
-        existRental.setDescription(rental.getDescription());
+        if(existRental == null) {
+            return Map.of("message", "The rental not exist");
+        }
+        if(name != null) {
+            existRental.setName(rental.getName());
+        }
+        if(surface != null) {
+            existRental.setSurface(rental.getSurface());
+        }
+        if(price != null) {
+            existRental.setPrice(rental.getPrice());
+        }
+        if(description != null) {
+            existRental.setDescription(rental.getDescription());
+        }
+        if(name != null) {
+            existRental.setName(rental.getName());
+        }
+        if(name != null) {
+            existRental.setName(rental.getName());
+        }
+        
         existRental.setOwner(existRental.getOwner());
+        if(picture != null) {
+            String uniqueID = UUID.randomUUID().toString().substring(0, 15);
+            byte[] bytes = picture.getBytes();
+            Path path = Paths.get(rentalsUploadsDirectory + uniqueID+"__"+picture.getOriginalFilename());
+            Files.write(path, bytes);
+            existRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());
+        }
+        
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();
         existRental.setUpdatedAt(dateFormatter.format(currentDate));

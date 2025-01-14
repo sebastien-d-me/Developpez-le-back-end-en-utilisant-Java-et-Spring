@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -113,7 +115,7 @@ public class RentalController {
 
     @Operation(summary = "Create a rental", description = "Create a rental.", tags = { "Rentals" })
     @SecurityRequirement(name = "bearerAuth")
-    @PostMapping("/api/rentals")
+    @PostMapping(value = "/api/rentals", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(
             mediaType = "application/json",
@@ -124,8 +126,13 @@ public class RentalController {
             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "")
         ))
 	})
-    public Map<String, String> createRental(@ModelAttribute RentalCreateDTO rental, @Parameter(hidden = true) @RequestParam("picture") MultipartFile picture) throws IOException {
-        return rentalService.saveRental(rental, picture);
+    public Map<String, String> createRental(
+        @RequestParam("name") String name,
+        @RequestParam("surface") String surface,
+        @RequestParam("price") String price,
+        @RequestParam("picture") MultipartFile picture,
+        @RequestParam("description") String description, @Parameter(hidden = true) RentalCreateDTO rental) throws IOException {
+        return rentalService.saveRental(name, surface, price, picture, description, rental);
     }
 
     @Operation(summary = "Edit a rental", description = "Edit a rental.", tags = { "Rentals" })
@@ -140,8 +147,12 @@ public class RentalController {
             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(value = "")
         ))
 	})
-    @PutMapping("/api/rentals/{id}")
-    public Map<String, String> editRental(@PathVariable Integer id, @ModelAttribute RentalUpdateDTO rental) throws IOException {
-        return rentalService.editRental(id, rental);
+    @PutMapping(value="/api/rentals/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public Map<String, String> editRental(@PathVariable Integer id, @RequestParam(required = false) String name,
+        @RequestParam(required = false) String surface,
+        @RequestParam(required = false) String price,
+        @RequestParam(required = false) MultipartFile picture,
+        @RequestParam(required = false) String description, @Parameter(hidden = true) RentalUpdateDTO rental) throws IOException {
+        return rentalService.editRental(id, name, surface, price, picture, description, rental);
     }
 }
