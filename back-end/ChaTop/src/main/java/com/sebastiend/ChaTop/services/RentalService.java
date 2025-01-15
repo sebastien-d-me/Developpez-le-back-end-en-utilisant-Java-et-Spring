@@ -1,5 +1,6 @@
 package com.sebastiend.ChaTop.services;
 
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,17 +12,12 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import com.sebastiend.ChaTop.models.dto.RentalCreateDTO;
 import com.sebastiend.ChaTop.models.dto.RentalDTO;
 import com.sebastiend.ChaTop.models.dto.RentalUpdateDTO;
@@ -30,8 +26,8 @@ import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
-
 import lombok.Data;
+
 
 @Data
 @Service

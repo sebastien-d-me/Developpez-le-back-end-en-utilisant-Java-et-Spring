@@ -1,12 +1,11 @@
 package com.sebastiend.ChaTop.models.mappers;
 
+
+import com.sebastiend.ChaTop.models.dto.RentalDTO;
+import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.sebastiend.ChaTop.models.dto.MessageDTO;
-import com.sebastiend.ChaTop.models.dto.RentalDTO;
-import com.sebastiend.ChaTop.models.entities.MessageEntity;
-import com.sebastiend.ChaTop.models.entities.RentalEntity;
 
 public class RentalMapperDTO {
         public static RentalDTO convertDTO(RentalEntity rental) {

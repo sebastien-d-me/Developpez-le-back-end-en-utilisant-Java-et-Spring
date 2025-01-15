@@ -1,5 +1,6 @@
 package com.sebastiend.ChaTop.models.entities;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonProperty;

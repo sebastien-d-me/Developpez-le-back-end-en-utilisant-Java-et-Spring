@@ -1,30 +1,16 @@
 package com.sebastiend.ChaTop.controllers;
 
-import java.util.Map;
-import java.util.Optional;
 
+import java.util.Map;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
-import org.springframework.http.MediaType;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.sebastiend.ChaTop.models.dto.UserDTO;
 import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
 import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
-import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
-import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.services.AuthenticationService;
-import com.sebastiend.ChaTop.services.JWTService;
-import com.sebastiend.ChaTop.services.RentalService;
-import com.sebastiend.ChaTop.services.UserService;
-
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -38,7 +24,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 public class AuthenticationController {
     @Autowired
     private AuthenticationService authenticationService;
-    private UserService userService;
     
     @Operation(summary = "Create a new user account", description = "Create a new user account.", tags = { "Authentication" })
     @ApiResponses(value = {

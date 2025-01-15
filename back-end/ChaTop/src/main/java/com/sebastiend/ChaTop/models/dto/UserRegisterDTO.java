@@ -1,6 +1,8 @@
 package com.sebastiend.ChaTop.models.dto;
 
+
 import lombok.Data;
+
 
 @Data
 public class UserRegisterDTO {

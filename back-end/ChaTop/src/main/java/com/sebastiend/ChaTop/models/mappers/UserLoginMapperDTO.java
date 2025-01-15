@@ -1,9 +1,8 @@
 package com.sebastiend.ChaTop.models.mappers;
 
-import com.sebastiend.ChaTop.models.dto.UserDTO;
-import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
-import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
+import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
+
 
 public class UserLoginMapperDTO {
     public static UserEntity convertEntity(UserLoginDTO userLogin) {

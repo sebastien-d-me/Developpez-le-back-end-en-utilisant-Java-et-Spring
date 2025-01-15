@@ -1,28 +1,22 @@
 package com.sebastiend.ChaTop.services;
 
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-
 import com.sebastiend.ChaTop.models.dto.MessageDTO;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
-import com.sebastiend.ChaTop.models.mappers.MessageMapperDTO;
-import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.repositories.MessageRepository;
 import com.sebastiend.ChaTop.repositories.RentalRepository;
 import com.sebastiend.ChaTop.repositories.UserRepository;
-
 import lombok.Data;
+
 
 @Data
 @Service
