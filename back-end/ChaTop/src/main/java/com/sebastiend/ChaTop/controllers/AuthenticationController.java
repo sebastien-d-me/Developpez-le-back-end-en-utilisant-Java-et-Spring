@@ -1,23 +1,16 @@
 package com.sebastiend.ChaTop.controllers;
 
 
+import com.sebastiend.ChaTop.models.dto.Users.*;
+import com.sebastiend.ChaTop.services.AuthenticationService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.sebastiend.ChaTop.models.dto.Users.UserDTO;
-import com.sebastiend.ChaTop.models.dto.Users.UserLoginDTO;
-import com.sebastiend.ChaTop.models.dto.Users.UserRegisterDTO;
-import com.sebastiend.ChaTop.services.AuthenticationService;
-import io.swagger.v3.oas.annotations.Operation;
-import org.springframework.web.bind.annotation.RequestBody;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController

@@ -9,7 +9,9 @@ import lombok.Data;
 public class MessageDTO {
     @JsonProperty("rental_id")
     private Integer rental;
+
     @JsonProperty("user_id")
     private Integer user;
+    
     private String message;
 }

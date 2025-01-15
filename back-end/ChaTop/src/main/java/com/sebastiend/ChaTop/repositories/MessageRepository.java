@@ -1,9 +1,9 @@
 package com.sebastiend.ChaTop.repositories;
 
 
-import org.springframework.stereotype.Repository;
-import org.springframework.data.repository.CrudRepository;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 
 @Repository

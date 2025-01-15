@@ -1,9 +1,9 @@
 package com.sebastiend.ChaTop.models.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @Data

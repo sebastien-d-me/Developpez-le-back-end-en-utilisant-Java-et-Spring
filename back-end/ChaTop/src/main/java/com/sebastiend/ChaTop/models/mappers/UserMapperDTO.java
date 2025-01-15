@@ -1,9 +1,9 @@
 package com.sebastiend.ChaTop.models.mappers;
 
 
-import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.dto.Users.UserDTO;
 import com.sebastiend.ChaTop.models.dto.Users.UserRegisterDTO;
+import com.sebastiend.ChaTop.models.entities.UserEntity;
 
 
 public class UserMapperDTO {
