@@ -8,7 +8,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
-import com.sebastiend.ChaTop.models.dto.MessageDTO;
+
+import com.sebastiend.ChaTop.models.dto.Message.MessageDTO;
 import com.sebastiend.ChaTop.models.entities.MessageEntity;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
@@ -36,10 +37,11 @@ public class MessageService {
         }
         MessageEntity newMessage = new MessageEntity();
         newMessage.setMessage(messageDTO.getMessage());
-        String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
-        UserEntity user = userRepository.findByEmail(jwt);
-        RentalEntity rental = rentaRepository.findById(messageDTO.getRental()).orElse(null);
+        /*String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepository.findByEmail(jwt);*/
+        UserEntity user = userRepository.findById(messageDTO.getUser()).orElse(null);
         newMessage.setUser(user);
+        RentalEntity rental = rentaRepository.findById(messageDTO.getRental()).orElse(null);
         newMessage.setRental(rental);
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
         LocalDateTime currentDate = LocalDateTime.now();

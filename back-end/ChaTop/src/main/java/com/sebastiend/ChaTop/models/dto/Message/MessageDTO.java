@@ -1,4 +1,4 @@
-package com.sebastiend.ChaTop.models.dto;
+package com.sebastiend.ChaTop.models.dto.Message;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -13,9 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import com.sebastiend.ChaTop.models.dto.RentalCreateDTO;
-import com.sebastiend.ChaTop.models.dto.RentalDTO;
-import com.sebastiend.ChaTop.models.dto.RentalUpdateDTO;
+
+import com.sebastiend.ChaTop.models.dto.Rentals.RentalCreateDTO;
+import com.sebastiend.ChaTop.models.dto.Rentals.RentalDTO;
+import com.sebastiend.ChaTop.models.dto.Rentals.RentalUpdateDTO;
 import com.sebastiend.ChaTop.services.RentalService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

@@ -9,9 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.sebastiend.ChaTop.models.dto.UserDTO;
-import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
-import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
+
+import com.sebastiend.ChaTop.models.dto.Users.UserDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserLoginDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserRegisterDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
 import com.sebastiend.ChaTop.models.mappers.UserMapperDTO;
 import com.sebastiend.ChaTop.repositories.UserRepository;
@@ -36,7 +37,7 @@ public class AuthenticationService {
         if(userRegisterDTO.getName() == null || userRegisterDTO.getEmail() == null || userRegisterDTO.getPassword() == null) {
             return Map.of("message", "Some fields are empty.");
         }
-        UserEntity user = UserMapperDTO.convertEntity(userRegisterDTO);
+        UserEntity user = UserMapperDTO.convertRegisterEntity(userRegisterDTO);
         UserEntity userCheck = userRepository.findByEmail(user.getEmail());
         if(userCheck != null) {
             return Map.of("message", "A user already exist with this email.");

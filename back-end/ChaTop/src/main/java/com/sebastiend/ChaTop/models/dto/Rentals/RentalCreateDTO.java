@@ -1,18 +1,15 @@
-package com.sebastiend.ChaTop.models.dto;
+package com.sebastiend.ChaTop.models.dto.Rentals;
 
 
 import lombok.Data;
 
 
 @Data
-public class RentalDTO {
-    private Integer id;
+public class RentalCreateDTO {
     private String name;
     private Integer surface;
     private Integer price;
     private String pictureSrc;
     private String description;
     private Integer ownerId;
-    private String createdAt;
-    private String updatedAt;
 }

@@ -6,7 +6,8 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.sebastiend.ChaTop.models.dto.MessageDTO;
+
+import com.sebastiend.ChaTop.models.dto.Message.MessageDTO;
 import com.sebastiend.ChaTop.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;

@@ -1,4 +1,4 @@
-package com.sebastiend.ChaTop.models.dto;
+package com.sebastiend.ChaTop.models.dto.Users;
 
 
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.sebastiend.ChaTop.models.mappers;
 
 
-import com.sebastiend.ChaTop.models.dto.RentalDTO;
+import com.sebastiend.ChaTop.models.dto.Rentals.RentalDTO;
 import com.sebastiend.ChaTop.models.entities.RentalEntity;
 import java.util.List;
 import java.util.stream.Collectors;

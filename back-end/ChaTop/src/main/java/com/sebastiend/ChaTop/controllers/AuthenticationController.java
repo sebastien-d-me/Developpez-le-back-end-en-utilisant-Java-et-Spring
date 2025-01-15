@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.sebastiend.ChaTop.models.dto.UserDTO;
-import com.sebastiend.ChaTop.models.dto.UserLoginDTO;
-import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
+
+import com.sebastiend.ChaTop.models.dto.Users.UserDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserLoginDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserRegisterDTO;
 import com.sebastiend.ChaTop.services.AuthenticationService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.RequestBody;

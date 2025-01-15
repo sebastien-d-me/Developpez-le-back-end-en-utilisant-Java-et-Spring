@@ -1,9 +1,9 @@
 package com.sebastiend.ChaTop.models.mappers;
 
 
-import com.sebastiend.ChaTop.models.dto.UserDTO;
 import com.sebastiend.ChaTop.models.entities.UserEntity;
-import com.sebastiend.ChaTop.models.dto.UserRegisterDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserDTO;
+import com.sebastiend.ChaTop.models.dto.Users.UserRegisterDTO;
 
 
 public class UserMapperDTO {
@@ -17,7 +17,7 @@ public class UserMapperDTO {
         return userDTO;
     }
 
-    public static UserEntity convertEntity(UserRegisterDTO userRegister) {
+    public static UserEntity convertRegisterEntity(UserRegisterDTO userRegister) {
         UserEntity user = new UserEntity();
         user.setName((userRegister.getName()));
         user.setEmail((userRegister.getEmail()));
