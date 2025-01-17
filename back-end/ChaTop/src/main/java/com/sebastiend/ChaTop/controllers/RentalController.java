@@ -25,30 +25,32 @@ public class RentalController {
     @ApiResponses(value = {
 		@ApiResponse(responseCode = "200", description = "OK", content = @io.swagger.v3.oas.annotations.media.Content(
             examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                value = "[\n"+
-                    "{\n"+
-                        "  \"id\": 1,\n"+
-                        "  \"name\": \"name edited\",\n"+
-                        "  \"surface\": 50,\n"+
-                        "  \"price\": 200,\n"+
-                        "  \"pictureSrc\": \"1705ceab-7493-4-Screenshot_3.png\",\n"+
-                        "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum. Praesent mollis neque sed sagittis ultricies. Suspendisse congue ligula at justo molestie, eget cursus nulla tincidunt. Pellentesque elementum rhoncus arcu, viverra gravida turpis mattis in. Maecenas tempor elementum lorem vel ultricies. Nam tempus laoreet eros, et viverra libero tincidunt a. Nunc vel nisi vulputate, sodales massa eu, varius erat.\",\n"+
-                        "  \"ownerId\": 1,\n"+
-                        "  \"createdAt\": \"2025-01-13 20:36:58\",\n"+
-                        "  \"updatedAt\": \"2025-01-13 20:37:37\"\n"+
-                    "},"+
-                    "{\n"+
-                        "  \"id\": 2,\n"+
-                        "  \"name\": \"name 2\",\n" +
-                        "  \"surface\": 100,\n"+
-                        "  \"price\": 50,\n"+
-                        "  \"pictureSrc\": \"16b7d4af-7081-4-Screenshot_2.png\",\n"+
-                        "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum.\",\n"+
-                        "  \"ownerId\": 1,\n"+
-                        "  \"createdAt\": \"2025-01-13 20:37:22\",\n"+
-                        "  \"updatedAt\": \"2025-01-13 20:37:22\"\n"+
-                    "}\n"+
-                "]"
+                value = "{\n"+
+                    "\"rentals\" : [\n"+
+                        "{\n"+
+                            "  \"id\": 1,\n"+
+                            "  \"name\": \"name edited\",\n"+
+                            "  \"surface\": 50,\n"+
+                            "  \"price\": 200,\n"+
+                            "  \"pictureSrc\": \"1705ceab-7493-4-Screenshot_3.png\",\n"+
+                            "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum. Praesent mollis neque sed sagittis ultricies. Suspendisse congue ligula at justo molestie, eget cursus nulla tincidunt. Pellentesque elementum rhoncus arcu, viverra gravida turpis mattis in. Maecenas tempor elementum lorem vel ultricies. Nam tempus laoreet eros, et viverra libero tincidunt a. Nunc vel nisi vulputate, sodales massa eu, varius erat.\",\n"+
+                            "  \"ownerId\": 1,\n"+
+                            "  \"createdAt\": \"2025-01-13 20:36:58\",\n"+
+                            "  \"updatedAt\": \"2025-01-13 20:37:37\"\n"+
+                        "},"+
+                        "{\n"+
+                            "  \"id\": 2,\n"+
+                            "  \"name\": \"name 2\",\n" +
+                            "  \"surface\": 100,\n"+
+                            "  \"price\": 50,\n"+
+                            "  \"pictureSrc\": \"16b7d4af-7081-4-Screenshot_2.png\",\n"+
+                            "  \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a lectus eleifend, varius massa ac, mollis tortor. Quisque ipsum nulla, faucibus ac metus a, eleifend efficitur augue. Integer vel pulvinar ipsum.\",\n"+
+                            "  \"ownerId\": 1,\n"+
+                            "  \"createdAt\": \"2025-01-13 20:37:22\",\n"+
+                            "  \"updatedAt\": \"2025-01-13 20:37:22\"\n"+
+                        "}\n"+
+                    "]"+
+                "}"
             ),
             mediaType = "application/json"
         )),
@@ -62,7 +64,7 @@ public class RentalController {
     @GetMapping("/api/rentals")
     @Operation(summary = "Get all the rentals", description = "Get all the rentals.", tags = { "Rentals" })
     @SecurityRequirement(name = "bearerAuth")
-    public List<RentalDTO> getRentals() {
+    public Map<String, Object> getRentals() {
         return rentalService.getRentals();
     }
 

@@ -33,7 +33,7 @@ public class MessageService {
 
         UserEntity user = userRepository.findById(messageDTO.getUser()).orElse(null);
         RentalEntity rental = rentaRepository.findById(messageDTO.getRental()).orElse(null);
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDateTime currentDate = LocalDateTime.now();
 
         MessageEntity newMessage = new MessageEntity();

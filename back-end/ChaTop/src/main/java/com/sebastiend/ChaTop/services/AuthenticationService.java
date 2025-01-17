@@ -43,7 +43,7 @@ public class AuthenticationService {
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String password = passwordEncoder.encode(user.getPassword());
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDateTime currentDate = LocalDateTime.now();
 
         UserEntity newUser = new UserEntity();

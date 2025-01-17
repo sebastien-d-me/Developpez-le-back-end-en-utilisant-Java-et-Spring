@@ -1,12 +1,17 @@
 {"properties": [
-    {
-        "name": "jwt.key",
-        "type": "java.lang.String",
-        "description": "JWT Key for the security"
-    },
-    {
-        "name": "rentals.uploads.directory",
-        "type": "java.lang.String",
-        "description": "Upload rentals picture directory"
-    }
+  {
+    "name": "jwt.key",
+    "type": "java.lang.String",
+    "description": "JWT Key for the security"
+  },
+  {
+    "name": "rentals.uploads.directory",
+    "type": "java.lang.String",
+    "description": "Upload rentals picture directory"
+  },
+  {
+    "name": "rentals.link.directory",
+    "type": "java.lang.String",
+    "description": "A description for 'rentals.link.directory'"
+  }
 ]}

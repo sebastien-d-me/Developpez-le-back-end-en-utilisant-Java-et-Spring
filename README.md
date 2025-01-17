@@ -29,3 +29,4 @@ Développez le back-end en utilisant Java et Spring
 1. Effectuez la commande : `npm run start` à la racine
 2. Effectuez la commande `mvn spring-boot:run` dans le répertoire back-end/Chatop
 3. En cas de besoin, l'URL du Swagger est la suivante : http://127.0.0.1:8080/v3/swagger-ui/index.html
+3.1 Pensez à changer l'adresse si votre serveur n'est pas liée à cette IP

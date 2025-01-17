@@ -36,14 +36,17 @@ public class RentalService {
     @Value("${rentals.uploads.directory}")
     private String rentalsUploadsDirectory;
 
+    @Value("${rentals.link.directory}")
+    private String rentalsLinkDirectory;
 
     public Optional<RentalDTO> getRental(final Integer id) {
-        return rentalRepository.findById(id).map(RentalMapperDTO::convertDTO);
+        return rentalRepository.findById(id).map(rental -> RentalMapperDTO.convertDTO(rental, rentalsLinkDirectory));
     }
 
 
-    public List<RentalDTO> getRentals() {
-        return rentalRepository.findAll().stream().map(RentalMapperDTO::convertDTO).collect(Collectors.toList());
+    public Map<String, Object> getRentals() {
+        List<RentalDTO> rentals = rentalRepository.findAll().stream().map(rental -> RentalMapperDTO.convertDTO(rental, rentalsLinkDirectory)).collect(Collectors.toList());
+        return Map.of("rentals", rentals);
     }
 
 
@@ -63,7 +66,7 @@ public class RentalService {
         Path path = Paths.get(rentalsUploadsDirectory + uniqueID+"__"+picture.getOriginalFilename());
         Files.write(path, bytes);
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDateTime currentDate = LocalDateTime.now();
 
         RentalEntity newRental = new RentalEntity();
@@ -72,7 +75,7 @@ public class RentalService {
         newRental.setPrice(rental.getPrice());
         newRental.setDescription(rental.getDescription());
         newRental.setOwner(userCheckExist);
-        newRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());
+        newRental.setPictureSrc(uniqueID+"__"+picture.getOriginalFilename());
         newRental.setCreatedAt(dateFormatter.format(currentDate));
         newRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(newRental);  
@@ -87,7 +90,7 @@ public class RentalService {
             return Map.of("message", "The rental not exist");
         }
 
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss");
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
         LocalDateTime currentDate = LocalDateTime.now();
 
         RentalEntity existRental = rentalRepository.findById(id).get();
@@ -111,7 +114,7 @@ public class RentalService {
             byte[] bytes = picture.getBytes();
             Path path = Paths.get(rentalsUploadsDirectory + uniqueID+"__"+picture.getOriginalFilename());
             Files.write(path, bytes);
-            existRental.setPictureSrc(uniqueID+"-"+picture.getOriginalFilename());
+            existRental.setPictureSrc(uniqueID+"__"+picture.getOriginalFilename());
         }
         existRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(existRental);

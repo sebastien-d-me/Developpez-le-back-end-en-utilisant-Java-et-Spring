@@ -1,4 +1,1 @@
-TÂCHES :
-1 /
-- Nettoyer le code dans son intégralité
-- Tout vérifier
+- Connecter au Front
