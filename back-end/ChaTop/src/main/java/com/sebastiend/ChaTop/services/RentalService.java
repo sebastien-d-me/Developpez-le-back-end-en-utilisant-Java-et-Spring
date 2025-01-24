@@ -1,6 +1,7 @@
 package com.sebastiend.ChaTop.services;
 
 
+import com.sebastiend.ChaTop.models.dto.Message.MessageResponseDTO;
 import com.sebastiend.ChaTop.models.dto.Rentals.*;
 import com.sebastiend.ChaTop.models.entities.*;
 import com.sebastiend.ChaTop.models.mappers.RentalMapperDTO;
@@ -50,15 +51,15 @@ public class RentalService {
     }
 
 
-    public Map<String, String> saveRental(String name, String surface, String price, MultipartFile picture, String description, RentalCreateDTO rental) throws IOException {
+    public RentalResponseDTO saveRental(String name, String surface, String price, MultipartFile picture, String description, RentalCreateDTO rental) throws IOException {
         if(name == null || surface == null || price == null || picture.getOriginalFilename() == "" || description == null) {
-            return Map.of("message", "Some fields are empty.");
+            throw new IllegalArgumentException("Some fields are empty.");
         }
 
         String jwt = SecurityContextHolder.getContext().getAuthentication().getName();
         UserEntity userCheckExist = userRepository.findByEmail(jwt);
         if(userCheckExist == null) {
-            return Map.of("message", "The user not exist");
+            throw new IllegalArgumentException("The user not exist");
         }
 
         String uniqueID = UUID.randomUUID().toString().substring(0, 15);
@@ -78,16 +79,16 @@ public class RentalService {
         newRental.setPictureSrc(uniqueID+"__"+picture.getOriginalFilename());
         newRental.setCreatedAt(dateFormatter.format(currentDate));
         newRental.setUpdatedAt(dateFormatter.format(currentDate));
-        rentalRepository.save(newRental);  
-        return Map.of("message", "Rental created !");
+        rentalRepository.save(newRental);
+        return new RentalResponseDTO("Rental created !");  
     }
 
 
-    public Map<String, String> editRental(final Integer id, String name, String surface, String price, MultipartFile picture, String description, RentalUpdateDTO rental) throws IOException {
+    public RentalResponseDTO editRental(final Integer id, String name, String surface, String price, MultipartFile picture, String description, RentalUpdateDTO rental) throws IOException {
         Optional<RentalEntity> rentalCheckExist = rentalRepository.findById(id);
 
         if(!rentalCheckExist.isPresent()) {
-            return Map.of("message", "The rental not exist");
+            throw new IllegalArgumentException("The rental not exist");
         }
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("uuuu-MM-dd");
@@ -118,6 +119,6 @@ public class RentalService {
         }
         existRental.setUpdatedAt(dateFormatter.format(currentDate));
         rentalRepository.save(existRental);
-        return Map.of("message", "Rental edited !");
+        return new RentalResponseDTO("Rental edited !"); 
     }
 }

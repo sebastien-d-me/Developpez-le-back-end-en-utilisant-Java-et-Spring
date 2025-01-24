@@ -2,6 +2,7 @@ package com.sebastiend.ChaTop.controllers;
 
 
 import com.sebastiend.ChaTop.models.dto.Rentals.*;
+import com.sebastiend.ChaTop.models.dto.Users.UserTokenResponseDTO;
 import com.sebastiend.ChaTop.services.RentalService;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.responses.*;
@@ -11,6 +12,7 @@ import java.io.IOException;
 import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -118,13 +120,13 @@ public class RentalController {
     @Operation(summary = "Create a rental", description = "Create a rental.", tags = { "Rentals" })
     @PostMapping(value = "/api/rentals", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @SecurityRequirement(name = "bearerAuth")
-    public Map<String, String> createRental(
-        @RequestParam("name") String name,
-        @RequestParam("surface") String surface,
-        @RequestParam("price") String price,
-        @RequestParam("picture") MultipartFile picture,
-        @RequestParam("description") String description, @Parameter(hidden = true) RentalCreateDTO rental) throws IOException {
-        return rentalService.saveRental(name, surface, price, picture, description, rental);
+    public ResponseEntity<?> createRental(String name, String surface, String price, MultipartFile picture, String description, @Parameter(hidden = true) RentalCreateDTO rental) throws IOException {
+        try {
+            RentalResponseDTO rentalResponseDTO = rentalService.saveRental(name, surface, price, picture, description, rental);
+            return ResponseEntity.ok().body(rentalResponseDTO);
+        } catch(IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body("{}");
+        }
     }
 
 
@@ -146,11 +148,12 @@ public class RentalController {
     @Operation(summary = "Edit a rental", description = "Edit a rental.", tags = { "Rentals" })
     @PutMapping(value="/api/rentals/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @SecurityRequirement(name = "bearerAuth")
-    public Map<String, String> editRental(@PathVariable Integer id, @RequestParam(required = false) String name,
-        @RequestParam(required = false) String surface,
-        @RequestParam(required = false) String price,
-        @RequestParam(required = false) MultipartFile picture,
-        @RequestParam(required = false) String description, @Parameter(hidden = true) RentalUpdateDTO rental) throws IOException {
-        return rentalService.editRental(id, name, surface, price, picture, description, rental);
+    public ResponseEntity<?> editRental(@PathVariable Integer id, @RequestParam(required = false) String name, @RequestParam(required = false) String surface, @RequestParam(required = false) String price, @RequestParam(required = false) MultipartFile picture, @RequestParam(required = false) String description, @Parameter(hidden = true) RentalUpdateDTO rental) throws IOException {
+        try {
+            RentalResponseDTO rentalResponseDTO = rentalService.editRental(id, name, surface, price, picture, description, rental);
+            return ResponseEntity.ok().body(rentalResponseDTO);
+        } catch(IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body("{}");
+        }
     }
 }
