@@ -66,7 +66,7 @@ public class RentalController {
     @GetMapping("/api/rentals")
     @Operation(summary = "Get all the rentals", description = "Get all the rentals.", tags = { "Rentals" })
     @SecurityRequirement(name = "bearerAuth")
-    public Map<String, Object> getRentals() {
+    public RentalListResponseDTO getRentals() {
         return rentalService.getRentals();
     }
 

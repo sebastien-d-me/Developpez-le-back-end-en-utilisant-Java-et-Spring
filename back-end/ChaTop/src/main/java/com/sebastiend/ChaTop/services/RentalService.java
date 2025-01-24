@@ -45,9 +45,9 @@ public class RentalService {
     }
 
 
-    public Map<String, Object> getRentals() {
+    public RentalListResponseDTO getRentals() {
         List<RentalDTO> rentals = rentalRepository.findAll().stream().map(rental -> RentalMapperDTO.convertDTO(rental, rentalsLinkDirectory)).collect(Collectors.toList());
-        return Map.of("rentals", rentals);
+        return new RentalListResponseDTO(rentals);
     }
 
 
