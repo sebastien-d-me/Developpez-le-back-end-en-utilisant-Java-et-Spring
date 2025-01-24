@@ -30,15 +30,15 @@ public class AuthenticationService {
 	}
 
 
-    public UserTokenDTO saveUser(UserRegisterDTO userRegisterDTO) {
+    public UserTokenResponseDTO saveUser(UserRegisterDTO userRegisterDTO) {
         if(userRegisterDTO.getName() == null || userRegisterDTO.getEmail() == null || userRegisterDTO.getPassword() == null) {
-            throw new IllegalArgumentException("Some fields are empty.");
+            throw new IllegalArgumentException("Some fields are empty");
         }
 
         UserEntity user = UserMapperDTO.convertRegisterEntity(userRegisterDTO);
         UserEntity userCheckExist = userRepository.findByEmail(user.getEmail());
         if(userCheckExist != null) {
-           throw new IllegalArgumentException("A user already exist with this email.");
+           throw new IllegalArgumentException("A user already exist with this email");
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -55,21 +55,21 @@ public class AuthenticationService {
         userRepository.save(newUser);
 
         String token = jwtService.generateToken(newUser);
-        return new UserTokenDTO(token);
+        return new UserTokenResponseDTO(token);
     }
 
 
-    public Map<String, String> loginUser(UserLoginDTO userLogin) throws AuthenticationException {
+    public UserTokenResponseDTO loginUser(UserLoginDTO userLogin) throws AuthenticationException {
         String email = userLogin.getEmail();
         String password = userLogin.getPassword();
         
         if(email == null || password == null) {
-            return Map.of("message", "Some fields are empty.");
+            throw new IllegalArgumentException("Some fields are empty");
         }
 
         UserEntity userCheckExist = userRepository.findByEmail(email);
         if(userCheckExist == null) {
-            return Map.of("message", "error no exist");
+            throw new IllegalArgumentException("User no exist");
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -77,9 +77,9 @@ public class AuthenticationService {
 
         if(passwordEncoder.matches(password, passwordCheckSame)) {
             String token = jwtService.generateToken(userCheckExist);
-            return Map.of("token", token);
+            return new UserTokenResponseDTO(token);
         } else {
-            return Map.of("message", "error passowrd");
+            throw new IllegalArgumentException("Passowrd is incorrect");
         }
     }
 

@@ -39,8 +39,8 @@ public class AuthenticationController {
     @PostMapping("/api/auth/register")
     public ResponseEntity<?> registerUser(@RequestBody UserRegisterDTO userRegisterDTO) {
         try {
-            UserTokenDTO userTokenDTO = authenticationService.saveUser(userRegisterDTO);
-            return ResponseEntity.ok().body(userTokenDTO);
+            UserTokenResponseDTO userTokenResponseDTO = authenticationService.saveUser(userRegisterDTO);
+            return ResponseEntity.ok().body(userTokenResponseDTO);
         } catch(IllegalArgumentException error) {
             return ResponseEntity.badRequest().body("{}");
         }
@@ -63,8 +63,13 @@ public class AuthenticationController {
     })
     @Operation(summary = "Log in the user", description = "Log in the user.", tags = { "Authentication" })
     @PostMapping("/api/auth/login")
-    public Map<String, String> loginUser(@RequestBody UserLoginDTO userLogin) throws AuthenticationException {
-        return authenticationService.loginUser(userLogin);
+    public ResponseEntity<?> loginUser(@RequestBody UserLoginDTO userLogin) throws AuthenticationException {
+        try {
+            UserTokenResponseDTO userTokenResponseDTO = authenticationService.loginUser(userLogin);
+            return ResponseEntity.ok().body(userTokenResponseDTO);
+        } catch(IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body(new UserErrorResponseDTO(error.getMessage()));
+        }
 	}
 
     

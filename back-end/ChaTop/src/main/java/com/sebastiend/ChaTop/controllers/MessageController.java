@@ -2,6 +2,7 @@ package com.sebastiend.ChaTop.controllers;
 
 
 import com.sebastiend.ChaTop.models.dto.Message.MessageDTO;
+import com.sebastiend.ChaTop.models.dto.Message.MessageResponseDTO;
 import com.sebastiend.ChaTop.services.MessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.*;
@@ -10,6 +11,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.io.IOException;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -43,7 +45,12 @@ public class MessageController {
     @Operation(summary = "Create a message", description = "Create a message.", tags = { "Messages" })
     @PostMapping("/api/messages")
     @SecurityRequirement(name = "bearerAuth")
-    public Map<String, String> createRental(@RequestBody MessageDTO message) throws IOException {
-        return messageService.saveMessage(message);
+    public ResponseEntity<?> createMessage(@RequestBody MessageDTO message) throws IOException {
+        try {
+            MessageResponseDTO messageResponseDTO = messageService.saveMessage(message);
+            return ResponseEntity.ok().body(messageResponseDTO);
+        } catch(IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body("{}");
+        }
     }
 }

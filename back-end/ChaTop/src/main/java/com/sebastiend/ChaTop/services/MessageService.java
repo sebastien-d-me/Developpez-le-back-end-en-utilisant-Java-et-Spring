@@ -2,6 +2,7 @@ package com.sebastiend.ChaTop.services;
 
 
 import com.sebastiend.ChaTop.models.dto.Message.MessageDTO;
+import com.sebastiend.ChaTop.models.dto.Message.MessageResponseDTO;
 import com.sebastiend.ChaTop.models.entities.*;
 import com.sebastiend.ChaTop.repositories.*;
 import java.io.IOException;
@@ -26,9 +27,9 @@ public class MessageService {
     private RentalRepository rentaRepository;
 
 
-    public Map<String, String> saveMessage(MessageDTO messageDTO) throws IOException {
+    public MessageResponseDTO saveMessage(MessageDTO messageDTO) throws IOException {
         if(messageDTO.getMessage() == null || messageDTO.getRental() == null) {
-            return Map.of("message", "Some fields are empty.");
+            throw new IllegalArgumentException("Some fields are empty.");
         }
 
         UserEntity user = userRepository.findById(messageDTO.getUser()).orElse(null);
@@ -43,6 +44,6 @@ public class MessageService {
         newMessage.setCreatedAt(dateFormatter.format(currentDate));
         newMessage.setUpdatedAt(dateFormatter.format(currentDate));
         messageRepository.save(newMessage);
-        return Map.of("message", "Message send with success");
+        return new MessageResponseDTO("Message send with success");
     }
 }
