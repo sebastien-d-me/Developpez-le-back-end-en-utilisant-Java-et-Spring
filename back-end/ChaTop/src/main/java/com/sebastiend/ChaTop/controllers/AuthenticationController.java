@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.Map;
 import org.apache.tomcat.websocket.AuthenticationException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -36,8 +37,13 @@ public class AuthenticationController {
     })
     @Operation(summary = "Create a new user account", description = "Create a new user account.", tags = { "Authentication" })
     @PostMapping("/api/auth/register")
-    public Map<String, String> registerUser(@RequestBody UserRegisterDTO userRegisterDTO) {
-        return authenticationService.saveUser(userRegisterDTO);
+    public ResponseEntity<?> registerUser(@RequestBody UserRegisterDTO userRegisterDTO) {
+        try {
+            UserTokenDTO userTokenDTO = authenticationService.saveUser(userRegisterDTO);
+            return ResponseEntity.ok().body(userTokenDTO);
+        } catch(IllegalArgumentException error) {
+            return ResponseEntity.badRequest().body("{}");
+        }
     }
 
     

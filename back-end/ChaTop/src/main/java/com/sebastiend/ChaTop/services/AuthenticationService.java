@@ -30,15 +30,15 @@ public class AuthenticationService {
 	}
 
 
-    public Map<String, String> saveUser(UserRegisterDTO userRegisterDTO) {
+    public UserTokenDTO saveUser(UserRegisterDTO userRegisterDTO) {
         if(userRegisterDTO.getName() == null || userRegisterDTO.getEmail() == null || userRegisterDTO.getPassword() == null) {
-            return Map.of("message", "Some fields are empty.");
+            throw new IllegalArgumentException("Some fields are empty.");
         }
 
         UserEntity user = UserMapperDTO.convertRegisterEntity(userRegisterDTO);
         UserEntity userCheckExist = userRepository.findByEmail(user.getEmail());
         if(userCheckExist != null) {
-            return Map.of("message", "A user already exist with this email.");
+           throw new IllegalArgumentException("A user already exist with this email.");
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -55,7 +55,7 @@ public class AuthenticationService {
         userRepository.save(newUser);
 
         String token = jwtService.generateToken(newUser);
-        return Map.of("token", token);
+        return new UserTokenDTO(token);
     }
 
 
