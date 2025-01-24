@@ -2,7 +2,6 @@ package com.sebastiend.ChaTop.controllers;
 
 
 import com.sebastiend.ChaTop.models.dto.Rentals.*;
-import com.sebastiend.ChaTop.models.dto.Users.UserTokenResponseDTO;
 import com.sebastiend.ChaTop.services.RentalService;
 import io.swagger.v3.oas.annotations.*;
 import io.swagger.v3.oas.annotations.responses.*;
